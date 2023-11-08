@@ -1,7 +1,9 @@
 package com.felipesantos.warmine.events.data;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.util.FileManipuler;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,11 +18,17 @@ public class PlayerConnectEvent {
     @SubscribeEvent
     public static void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent event){
         if(!isInitialConnect){
-            if(!event.getPlayer().getEntityWorld().isRemote()){
+            PlayerEntity player = event.getPlayer();
+            if(player.getEntityWorld().isRemote()){
                 String path;
-                boolean pathLocalized = FileManipuler.locateWorldSave(event.getPlayer().getServer());
+                boolean pathLocalized = FileManipuler.locateWorldSave(player.getServer());
                 if(pathLocalized){
                     WarMine.IS_POSSIBLE = true;
+
+                    MinecraftData.server = player.getServer();
+                    MinecraftData.world = player.getEntityWorld();
+                    MinecraftData.score = player.getWorldScoreboard();
+
                     event.getPlayer().sendStatusMessage(new StringTextComponent("World File localizated!"),true);
                 } else {
                     event.getPlayer().sendStatusMessage(new StringTextComponent("World File not found!"),true);
