@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 public class WarMine
 {
     public static final String MOD_ID = "warmine";
+    public static boolean IS_POSSIBLE = false;
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();

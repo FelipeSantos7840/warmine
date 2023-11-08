@@ -1,3 +1,4 @@
 {
-  "block.warmine.crown_block": "Crown Block"
+  "block.warmine.crown_block": "Crown Block",
+  "command.warmine.startwarmine.success": "Configuração Inicial feita com sucesso!"
 }
