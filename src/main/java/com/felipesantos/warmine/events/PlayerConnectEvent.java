@@ -2,7 +2,9 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.MinecraftData;
+import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.Team;
+import com.felipesantos.warmine.entities.WarMineData;
 import com.felipesantos.warmine.util.FileManipuler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
@@ -28,9 +30,16 @@ public class PlayerConnectEvent {
                 MinecraftData.server = player.getServer();
                 MinecraftData.world = player.getEntityWorld();
                 MinecraftData.score = player.getWorldScoreboard();
+                MinecraftData.warmine = new WarMineData();
 
                 if(FileManipuler.warmineFolderExist()){
-                    MinecraftData.warmine = FileManipuler.warmineCollectData();
+                    FileManipuler.warmineCollectData(MinecraftData.warmine);
+
+                    System.out.println("Log: Information Describe: ");
+                    System.out.println("Log: Size = " + MinecraftData.warmine.getPlayers().size());
+                    for(Player playerLoop : MinecraftData.warmine.getPlayers()){
+                        System.out.print(playerLoop.getName() + ", ");
+                    }
                 }
 
                 event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome to the §6 Warminer §r!"),true);

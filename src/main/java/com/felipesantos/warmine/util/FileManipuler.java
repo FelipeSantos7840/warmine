@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.util;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.entities.WarMineData;
 import net.minecraft.server.MinecraftServer;
 
@@ -52,9 +53,9 @@ public class FileManipuler {
         }
     }
 
-    public static WarMineData warmineCollectData(){
-        return new WarMineData(
-                JsonManipulator.teamsCollect());
+    public static void warmineCollectData(WarMineData warMineData){
+        warMineData.setTeams(JsonManipulator.teamsCollect());
+        warMineData.setPlayers(JsonManipulator.playersCollect());
     }
 
     public static File warmineJSONFile(String fileName){
