@@ -33,7 +33,6 @@ public class FileManipuler {
     private static String searchNormalPath(String pathSearch){
         File file = new File(pathSearch+"\\"+worldName);
         if(file.exists()){
-            System.out.println("Log: WORLD_FOUND:"+file.getPath());
             return file.getPath();
         } else {
             return null;

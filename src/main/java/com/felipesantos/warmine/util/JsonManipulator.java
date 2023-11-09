@@ -26,7 +26,6 @@ public class JsonManipulator {
                 for (JsonNode nodeTeam : jsonNode.get("teams")) {
                     teams.add(JsonManipulator.teamCollect(nodeTeam));
                 }
-                System.out.println("Log: Team Get");
                 return teams;
             } catch (IOException | NullPointerException e) {
                 return new ArrayList<>();
