@@ -33,9 +33,9 @@ public class PlayerConnectEvent {
                     MinecraftData.warmine = FileManipuler.warmineCollectData();
                 }
 
-                event.getPlayer().sendStatusMessage(new StringTextComponent("World File localizated!"),true);
+                event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome to the §6 Warminer §r!"),true);
             } else {
-                event.getPlayer().sendStatusMessage(new StringTextComponent("World File not found!"),true);
+                event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome! Failed locate World!"),true);
             }
             isInitialConnect = true;
         }
