@@ -8,4 +8,6 @@ public class MinecraftData {
     public static World world;
     public static MinecraftServer server;
     public static Scoreboard score;
+
+    public static WarMineData warmine;
 }

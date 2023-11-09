@@ -2,6 +2,7 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.MinecraftData;
+import com.felipesantos.warmine.entities.Team;
 import com.felipesantos.warmine.util.FileManipuler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = WarMine.MOD_ID)
 public class PlayerConnectEvent {
 
-    public static boolean isInitialConnect = false;
+    private static boolean isInitialConnect = false;
 
     @SubscribeEvent
     public static void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent event){
@@ -28,8 +29,9 @@ public class PlayerConnectEvent {
                 MinecraftData.world = player.getEntityWorld();
                 MinecraftData.score = player.getWorldScoreboard();
 
-                //Commented below line is a test
-                //boolean created = FileManipuler.warmineFolderExist();
+                if(FileManipuler.warmineFolderExist()){
+                    MinecraftData.warmine = FileManipuler.warmineCollectData();
+                }
 
                 event.getPlayer().sendStatusMessage(new StringTextComponent("World File localizated!"),true);
             } else {

@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.util;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.entities.WarMineData;
 import net.minecraft.server.MinecraftServer;
 
 import java.io.File;
@@ -50,6 +51,15 @@ public class FileManipuler {
         } else {
             return true;
         }
+    }
+
+    public static WarMineData warmineCollectData(){
+        return new WarMineData(
+                JsonManipulator.teamsCollect());
+    }
+
+    public static File warmineJSONFile(String fileName){
+        return new File(FileManipuler.getWorldSavePath()+"\\warmine\\"+fileName);
     }
 
     private static void setWorldName(MinecraftServer server){
