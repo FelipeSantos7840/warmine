@@ -1,5 +1,6 @@
 package com.felipesantos.warmine.util;
 
+import com.felipesantos.warmine.WarMine;
 import net.minecraft.server.MinecraftServer;
 
 import java.io.File;
@@ -35,6 +36,19 @@ public class FileManipuler {
             return file.getPath();
         } else {
             return null;
+        }
+    }
+
+    public static boolean warmineFolderExist(){
+        if(!WarMine.IS_POSSIBLE){
+            return false;
+        }
+
+        File warmineFolder = new File(FileManipuler.worldSavePath + "\\warmine");
+        if(!warmineFolder.exists()){
+            return warmineFolder.mkdirs();
+        } else {
+            return true;
         }
     }
 
