@@ -58,6 +58,11 @@ public class FileManipuler {
         warMineData.setPlayers(JsonManipulator.playersCollect());
     }
 
+    public static void warmineSaveData(WarMineData warMineData){
+        JsonManipulator.saveTeams(warMineData.getTeams());
+        JsonManipulator.savePlayers(warMineData.getPlayers());
+    }
+
     public static File warmineJSONFile(String fileName){
         return new File(FileManipuler.getWorldSavePath()+"\\warmine\\"+fileName);
     }

@@ -27,4 +27,8 @@ public class Team {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public void incrementScore(int score){this.score += score;}
+
+    public void decrementScore(int score){this.score -= score;}
 }

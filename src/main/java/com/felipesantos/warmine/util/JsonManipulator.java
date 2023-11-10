@@ -3,6 +3,8 @@ package com.felipesantos.warmine.util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.Team;
@@ -39,6 +41,11 @@ public class JsonManipulator {
         }
     }
 
+    private static Team teamCollect(JsonNode teamJson){
+        return new Team(teamJson.get("name").asText(),teamJson.get("score").asInt());
+    }
+
+
     public static List<Player> playersCollect(){
         List<Player> players = new ArrayList<>();
         File jsonFile = FileManipuler.warmineJSONFile("players.json");
@@ -57,31 +64,55 @@ public class JsonManipulator {
         }
     }
 
-    private static Team teamCollect(JsonNode teamJson){
-        return new Team(teamJson.get("name").asText(),teamJson.get("score").asInt());
-    }
-
     private static Player playerCollect(JsonNode playerJson){
         String name = playerJson.get("name").asText();
         String team_name = playerJson.get("team_name").asText();
         if(MinecraftData.warmine.getTeams().isEmpty()){
             return new Player(name,null);
         } else {
-            return new Player(name,JsonManipulator.getTeam(team_name));
+            return new Player(name,WarMineData.getTeam(team_name));
         }
     }
 
-    private static Team getTeam(String teamPlayer){
-        List<Team> teamsResult = MinecraftData.warmine.getTeams().stream()
-                .filter((team)-> team.getName().equals(teamPlayer)).collect(Collectors.toList());
-        if(teamsResult.size() != 1){
-            return null;
-        } else {
-            return teamsResult.get(0);
+    public static void saveTeams(List<Team> teams){
+        ObjectNode rootNode = mapperJson.createObjectNode();
+        ArrayNode teamsNode = mapperJson.createArrayNode();
+        ObjectNode auxiliarNode;
+
+        for(Team team : teams){
+            auxiliarNode = mapperJson.createObjectNode();
+            auxiliarNode.put("name",team.getName());
+            auxiliarNode.put("score",team.getScore());
+            teamsNode.add(auxiliarNode);
+        }
+
+        rootNode.set("teams",teamsNode);
+        JsonManipulator.writeJson("teams.json",rootNode);
+    }
+
+    public static void savePlayers(List<Player> players){
+        ObjectNode rootNode = mapperJson.createObjectNode();
+        ArrayNode playersNode = mapperJson.createArrayNode();
+        ObjectNode auxiliarNode;
+
+        for(Player player : players){
+            auxiliarNode = mapperJson.createObjectNode();
+            auxiliarNode.put("name",player.getName());
+            auxiliarNode.put("team_name",player.getTeam() != null?player.getTeam().getName() : "NullTeam");
+            playersNode.add(auxiliarNode);
+        }
+
+        rootNode.set("players",playersNode);
+        JsonManipulator.writeJson("players.json",rootNode);
+    }
+
+    private static void writeJson(String jsonName,ObjectNode rootNode){
+        try{
+            mapperJson.writeValue(FileManipuler.warmineJSONFile(jsonName),rootNode);;
+        }catch (IOException e){
+            System.out.println("Error Log: "+e.getLocalizedMessage());
+            e.printStackTrace();
         }
     }
 
-    /*public static boolean teamsToJson(List<Team> teams){
-
-    }*/
 }
