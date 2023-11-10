@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.item;
 
 import com.felipesantos.warmine.WarMine;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;

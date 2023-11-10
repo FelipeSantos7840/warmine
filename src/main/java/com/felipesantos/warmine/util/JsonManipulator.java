@@ -42,19 +42,14 @@ public class JsonManipulator {
     public static List<Player> playersCollect(){
         List<Player> players = new ArrayList<>();
         File jsonFile = FileManipuler.warmineJSONFile("players.json");
-        System.out.println("Log: Get File = "+jsonFile.getPath());
         if(jsonFile.exists()){
-            System.out.println("Log: File Exists");
             try {
                 JsonNode jsonNode = mapperJson.readTree(jsonFile);
                 for (JsonNode nodePlayers : jsonNode.get("players")) {
                     players.add(JsonManipulator.playerCollect(nodePlayers));
                 }
-                System.out.println("Log: " + players.size() + " players");
                 return players;
             } catch (IOException | NullPointerException e){
-                System.out.println("Log: Excpetion Throwed");
-                System.out.println(e.getLocalizedMessage());
                 return new ArrayList<>();
             }
         } else {
@@ -67,28 +62,22 @@ public class JsonManipulator {
     }
 
     private static Player playerCollect(JsonNode playerJson){
-        System.out.println("Log: Tentando Coletar Dado");
         String name = playerJson.get("name").asText();
-        System.out.println("Log: Nome Coletado!");
         String team_name = playerJson.get("team_name").asText();
-        System.out.println("Log: NameTeam Coletado!");
-        System.out.println("Log: TeamSize:"+ MinecraftData.warmine.getTeams().size());
         if(MinecraftData.warmine.getTeams().isEmpty()){
-            System.out.println("Log: Times Vazios");
             return new Player(name,null);
         } else {
-            System.out.println("Log: Times com Dados");
-            System.out.println("Log: User Team Name = "+team_name);
-            System.out.print("Log: ");
-            for(Team team : MinecraftData.warmine.getTeams()){
-                System.out.print(team.getName()+", ");
-            }
-            List<Team> teamsResult = MinecraftData.warmine.getTeams().stream().filter((team)-> team.getName().equals(team_name)).collect(Collectors.toList());
-            System.out.println("Log:" + teamsResult.size() + " teams result");
-            if(teamsResult.size() != 1){
-                return new Player(name,null);
-            }
-            return new Player(name,teamsResult.get(0));
+            return new Player(name,JsonManipulator.getTeam(team_name));
+        }
+    }
+
+    private static Team getTeam(String teamPlayer){
+        List<Team> teamsResult = MinecraftData.warmine.getTeams().stream()
+                .filter((team)-> team.getName().equals(teamPlayer)).collect(Collectors.toList());
+        if(teamsResult.size() != 1){
+            return null;
+        } else {
+            return teamsResult.get(0);
         }
     }
 

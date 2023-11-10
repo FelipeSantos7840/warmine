@@ -34,12 +34,6 @@ public class PlayerConnectEvent {
 
                 if(FileManipuler.warmineFolderExist()){
                     FileManipuler.warmineCollectData(MinecraftData.warmine);
-
-                    System.out.println("Log: Information Describe: ");
-                    System.out.println("Log: Size = " + MinecraftData.warmine.getPlayers().size());
-                    for(Player playerLoop : MinecraftData.warmine.getPlayers()){
-                        System.out.print(playerLoop.getName() + ", ");
-                    }
                 }
 
                 event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome to the §6 Warminer §r!"),true);

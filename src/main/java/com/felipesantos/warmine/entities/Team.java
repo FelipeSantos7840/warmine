@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Team {
     private String name;
-    private int score;
+    private Integer score;
 
-    public Team(String name,int score){
+    public Team(String name,Integer score){
         this.name = name;
         this.score = score;
     }
@@ -20,7 +20,7 @@ public class Team {
         this.name = name;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
