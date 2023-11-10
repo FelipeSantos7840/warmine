@@ -98,7 +98,7 @@ public class JsonManipulator {
         for(Player player : players){
             auxiliarNode = mapperJson.createObjectNode();
             auxiliarNode.put("name",player.getName());
-            auxiliarNode.put("team_name",player.getTeam() != null?player.getTeam().getName() : "NullTeam");
+            auxiliarNode.put("team_name",(player.getTeam()!=null?player.getTeam().getName():"NullTeam"));
             playersNode.add(auxiliarNode);
         }
 
