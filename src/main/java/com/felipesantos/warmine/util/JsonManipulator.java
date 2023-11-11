@@ -141,7 +141,7 @@ public class JsonManipulator {
 
         for(CrownDataBlock crownBlock : crownBlocks){
             auxiliarNode = mapperJson.createObjectNode();
-            auxiliarNode.put("team_name",crownBlock.getWarTeam().getName());
+            auxiliarNode.put("team_name",crownBlock.getWarTeam()!=null?crownBlock.getWarTeam().getName():"NullTeam");
             auxiliarNode.put("capital_name",crownBlock.getName());
             auxiliarNode.put("x",crownBlock.getCoordinate().getX());
             auxiliarNode.put("y",crownBlock.getCoordinate().getY());
