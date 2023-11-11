@@ -62,6 +62,7 @@ public class WarMineData {
             for(WarTeam warTeam : warTeams){
                 if(warTeam.getName().equalsIgnoreCase(name)){
                     removeTeamOfPlayers(warTeam);
+                    removeTeamOfCapitals(warTeam);
                     teamsForDelete.add(warTeam);
                     teamRemoved = true;
                 }
@@ -80,7 +81,18 @@ public class WarMineData {
                 }
             }
         }
+    }
 
+    public void removeTeamOfCapitals(WarTeam warTeam){
+        if(!capitals.isEmpty()){
+            for(CrownDataBlock crownBlock : capitals){
+                if(crownBlock.getWarTeam() != null){
+                    if(crownBlock.getWarTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                        crownBlock.setWarTeam(null);
+                    }
+                }
+            }
+        }
     }
 
     public Player playerDataExist(String namePlayer){

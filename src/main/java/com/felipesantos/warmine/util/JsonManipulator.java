@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.felipesantos.warmine.entities.MinecraftData;
-import com.felipesantos.warmine.entities.Player;
-import com.felipesantos.warmine.entities.WarTeam;
-import com.felipesantos.warmine.entities.WarMineData;
+import com.felipesantos.warmine.entities.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +70,38 @@ public class JsonManipulator {
         }
     }
 
+    public static List<CrownDataBlock> crownBlocksCollect(){
+        List<CrownDataBlock> crownBlocks = new ArrayList<>();
+        File jsonFile = FileManipuler.warmineJSONFile("crown_block.json");
+
+        if(jsonFile.exists()){
+            try {
+                JsonNode jsonNode = mapperJson.readTree(jsonFile);
+                for (JsonNode nodeCrownBlock : jsonNode.get("crown_blocks")) {
+                    crownBlocks.add(JsonManipulator.crownBlockCollect(nodeCrownBlock));
+                }
+                return crownBlocks;
+            } catch (IOException | NullPointerException e) {
+                return new ArrayList<>();
+            }
+        } else {
+            return crownBlocks;
+        }
+    }
+
+    private static CrownDataBlock crownBlockCollect(JsonNode blockJson){
+        String teamBlock = blockJson.get("team_name").asText();
+        String nameCapital = blockJson.get("capital_name").asText();
+        int x = blockJson.get("x").asInt();
+        int y = blockJson.get("y").asInt();
+        int z = blockJson.get("z").asInt();
+        if(MinecraftData.warmine.getTeams().isEmpty()){
+            return new CrownDataBlock(new Coordinate(x,y,z),WarMineData.getTeam(teamBlock),nameCapital);
+        } else {
+            return new CrownDataBlock(new Coordinate(x,y,z),nameCapital);
+        }
+    }
+
     public static void saveTeams(List<WarTeam> warTeams){
         ObjectNode rootNode = mapperJson.createObjectNode();
         ArrayNode teamsNode = mapperJson.createArrayNode();
@@ -103,6 +132,26 @@ public class JsonManipulator {
 
         rootNode.set("players",playersNode);
         JsonManipulator.writeJson("players.json",rootNode);
+    }
+
+    public static void saveCrownBlocks(List<CrownDataBlock> crownBlocks){
+        ObjectNode rootNode = mapperJson.createObjectNode();
+        ArrayNode blocksNode = mapperJson.createArrayNode();
+        ObjectNode auxiliarNode;
+
+        for(CrownDataBlock crownBlock : crownBlocks){
+            auxiliarNode = mapperJson.createObjectNode();
+            auxiliarNode.put("team_name",crownBlock.getWarTeam().getName());
+            auxiliarNode.put("capital_name",crownBlock.getName());
+            auxiliarNode.put("x",crownBlock.getCoordinate().getX());
+            auxiliarNode.put("y",crownBlock.getCoordinate().getY());
+            auxiliarNode.put("z",crownBlock.getCoordinate().getZ());
+            blocksNode.add(auxiliarNode);
+        }
+
+        rootNode.set("crown_blocks",blocksNode);
+        JsonManipulator.writeJson("crown_block.json",rootNode);
+
     }
 
     private static void writeJson(String jsonName,ObjectNode rootNode){

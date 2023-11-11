@@ -5,4 +5,38 @@ public class CrownDataBlock {
     private WarTeam warTeam;
     private String name;
 
+    public CrownDataBlock(Coordinate coordinate, WarTeam warTeam, String name) {
+        this.coordinate = coordinate;
+        this.warTeam = warTeam;
+        this.name = name;
+    }
+
+    public CrownDataBlock(Coordinate coordinate, String name) {
+        this.coordinate = coordinate;
+        this.name = name;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public WarTeam getWarTeam() {
+        return warTeam;
+    }
+
+    public void setWarTeam(WarTeam warTeam) {
+        this.warTeam = warTeam;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

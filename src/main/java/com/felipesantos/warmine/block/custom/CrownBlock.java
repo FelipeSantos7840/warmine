@@ -13,11 +13,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
+
 
 
 public class CrownBlock extends HorizontalBlock {
@@ -29,7 +27,7 @@ public class CrownBlock extends HorizontalBlock {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if(!worldIn.isRemote()){
             if(placer instanceof PlayerEntity){
-                placer.getName().getString();
+                
             }
         }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
