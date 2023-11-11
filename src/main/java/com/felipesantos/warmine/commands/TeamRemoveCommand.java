@@ -19,7 +19,7 @@ public class TeamRemoveCommand {
 
     private int teamRemove(CommandSource source,String teamName){
             MinecraftTeamsManipulator.removeDataTeam(teamName);
-            source.sendFeedback(new StringTextComponent("Team Removed Suceffuly!"),true);
+            source.sendFeedback(new StringTextComponent("Deleted Team!"),true);
             return 1;
     }
 }

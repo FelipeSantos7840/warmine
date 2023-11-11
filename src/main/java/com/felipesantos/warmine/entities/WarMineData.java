@@ -2,6 +2,7 @@ package com.felipesantos.warmine.entities;
 
 import net.minecraft.scoreboard.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,23 +58,38 @@ public class WarMineData {
 
     public boolean removeTeam(String name){
         boolean teamRemoved = false;
-        for(WarTeam warTeam : warTeams){
-            if(warTeam.getName().equalsIgnoreCase(name)){
-                removeTeamOfPlayers(warTeam);
-                warTeams.remove(warTeam);
-                teamRemoved = true;
+        List<WarTeam> teamsForDelete = new ArrayList<>();
+            for(WarTeam warTeam : warTeams){
+                if(warTeam.getName().equalsIgnoreCase(name)){
+                    removeTeamOfPlayers(warTeam);
+                    teamsForDelete.add(warTeam);
+                    teamRemoved = true;
+                }
             }
-        }
+            warTeams.removeAll(teamsForDelete);
         return teamRemoved;
     }
 
     public void removeTeamOfPlayers(WarTeam warTeam){
-        for(Player player : players){
-            if(player.getTeam() != null){
-                if(player.getTeam().getName().equalsIgnoreCase(warTeam.getName())){
-                    player.setTeam(null);
+        if(!players.isEmpty()){
+            for(Player player : players){
+                if(player.getTeam() != null){
+                    if(player.getTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                        player.setTeam(null);
+                    }
                 }
             }
         }
+
+    }
+
+    public boolean playerDataExist(String namePlayer){
+        boolean playerExist = false;
+        for(Player player : players){
+            if(player.getName().equalsIgnoreCase(namePlayer)){
+                playerExist = true;
+            }
+        }
+        return playerExist;
     }
 }

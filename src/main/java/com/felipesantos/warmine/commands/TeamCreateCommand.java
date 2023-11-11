@@ -9,9 +9,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+
 
 public class TeamCreateCommand {
     public TeamCreateCommand(CommandDispatcher<CommandSource> dispatcher){

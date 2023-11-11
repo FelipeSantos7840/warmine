@@ -4,6 +4,7 @@ import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.entities.WarMineData;
 import com.felipesantos.warmine.util.FileManipuler;
+import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -18,8 +19,8 @@ public class PlayerConnectEvent {
 
     @SubscribeEvent
     public static void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent event){
+        PlayerEntity player = event.getPlayer();
         if(!isInitialConnect){
-            PlayerEntity player = event.getPlayer();
             String path;
             boolean pathLocalized = FileManipuler.locateWorldSave(player.getServer());
             if(pathLocalized){
@@ -39,6 +40,11 @@ public class PlayerConnectEvent {
                 event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome! Failed locate World!"),true);
             }
             isInitialConnect = true;
+        }
+
+        String playerName = player.getName().getString();
+        if(!MinecraftData.warmine.playerDataExist(playerName)){
+            MinecraftTeamsManipulator.addPlayerTeam(playerName,null);
         }
     }
 }

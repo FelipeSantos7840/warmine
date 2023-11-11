@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.util;
 
 import com.felipesantos.warmine.entities.MinecraftData;
+import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarTeam;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
@@ -33,5 +34,43 @@ public class MinecraftTeamsManipulator {
             }
         }
         MinecraftData.warmine.removeTeam(nameTeam);
+    }
+
+    public static void addPlayerTeam(String namePlayer,String nameTeam){
+        ScorePlayerTeam mineTeam = (ScorePlayerTeam) existMinecraftTeam(nameTeam);
+        WarTeam warTeam = existWarMineTeam(namePlayer);
+        if((mineTeam != null) && (warTeam != null)){
+            mineTeam.getMembershipCollection().add(namePlayer);
+            MinecraftData.warmine.getPlayers().add(new Player(namePlayer,warTeam));
+        } else {
+            MinecraftData.warmine.getPlayers().add(new Player(namePlayer,warTeam));
+        }
+    }
+
+    public static Team existMinecraftTeam(String nameTeam){
+        Team team = null;
+        if(nameTeam != null){
+            for(Team mineTeam : MinecraftData.score.getTeams()){
+                if(mineTeam.getName().equalsIgnoreCase(nameTeam)){
+                    team = mineTeam;
+                    break;
+                }
+            }
+        }
+        return team;
+    }
+
+    public static WarTeam existWarMineTeam(String nameWarTeam){
+        WarTeam team = null;
+        if(nameWarTeam != null){
+            for (WarTeam warMineTeam : MinecraftData.warmine.getTeams()){
+                if(warMineTeam.getName().equalsIgnoreCase(nameWarTeam)){
+                    team = warMineTeam;
+                    break;
+                }
+            }
+        }
+
+        return team;
     }
 }
