@@ -2,8 +2,6 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.MinecraftData;
-import com.felipesantos.warmine.entities.Player;
-import com.felipesantos.warmine.entities.Team;
 import com.felipesantos.warmine.entities.WarMineData;
 import com.felipesantos.warmine.util.FileManipuler;
 import net.minecraft.entity.player.PlayerEntity;

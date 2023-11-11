@@ -17,7 +17,7 @@ loading system that allows us to modify Minecraft's code as elegently as possibl
 Mezz, who has stepped up as the issue and pull request manager. Helping to keep me
 sane as well as guiding the community into creating better additions to Forge.
 
-Searge, Bspks, Fesh0r, ProfMobious, and all the rest over on the MCP team {of which 
+Searge, Bspks, Fesh0r, ProfMobious, and all the rest over on the MCP warTeam {of which
 I am a part}. For creating some of the core tools needed to make Minecraft modding 
 both possible, and as stable as can be.
   On that note, here is some specific information of the MCP data we use:
@@ -61,5 +61,5 @@ It also contains a partial repackaging of the javaxdelta library from http://sou
 with credit to it's authors.
 
 Forge Mod Loader downloads components from the Minecraft Coder Pack
-(http://mcp.ocean-labs.de/index.php/Main_Page) with kind permission from the MCP team.
+(http://mcp.ocean-labs.de/index.php/Main_Page) with kind permission from the MCP warTeam.
 

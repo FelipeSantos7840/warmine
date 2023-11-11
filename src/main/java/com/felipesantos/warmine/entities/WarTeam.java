@@ -1,13 +1,10 @@
 package com.felipesantos.warmine.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Team {
+public class WarTeam {
     private String name;
     private Integer score;
 
-    public Team(String name,Integer score){
+    public WarTeam(String name, Integer score){
         this.name = name;
         this.score = score;
     }

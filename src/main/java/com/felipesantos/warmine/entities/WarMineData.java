@@ -4,35 +4,47 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WarMineData {
-    private List<Team> teams;
-    private List<Player> players;
 
-    public WarMineData(List<Team> teams, List<Player> players) {
-        this.teams = teams;
+    public static final int INITIAL_SCORE = 0;
+    private List<WarTeam> warTeams;
+    private List<Player> players;
+    private List<CrownDataBlock> capitals;
+
+    public WarMineData(List<WarTeam> warTeams, List<Player> players, List<CrownDataBlock> capitals) {
+        this.warTeams = warTeams;
         this.players = players;
+        this.capitals = capitals;
     }
 
     public WarMineData() {
     }
 
-    public List<Team> getTeams() {
-        return teams;
+    public List<WarTeam> getTeams() {
+        return warTeams;
     }
 
     public List<Player> getPlayers() {
         return players;
     }
 
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
+    public List<CrownDataBlock> getCapitals() {
+        return capitals;
+    }
+
+    public void setTeams(List<WarTeam> warTeams) {
+        this.warTeams = warTeams;
     }
 
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
 
-    public static Team getTeam(String teamPlayer){
-        List<Team> teamsResult = MinecraftData.warmine.getTeams().stream()
+    public void setCapitals(List<CrownDataBlock> capitals) {
+        this.capitals = capitals;
+    }
+
+    public static WarTeam getTeam(String teamPlayer){
+        List<WarTeam> teamsResult = MinecraftData.warmine.getTeams().stream()
                 .filter((team)-> team.getName().equals(teamPlayer)).collect(Collectors.toList());
         if(teamsResult.size() != 1){
             return null;

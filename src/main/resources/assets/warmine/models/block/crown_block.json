@@ -1,6 +1,12 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "warmine:block/crown_block"
-  }
+  "parent": "block/cube",
+    "textures": {
+      "north": "warmine:block/crown_block",
+      "east": "warmine:block/crown_block_side",
+      "south": "warmine:block/crown_block_side",
+      "west": "warmine:block/crown_block_side",
+      "up": "warmine:block/crown_block_side",
+      "down": "warmine:block/crown_block_side",
+      "particle": "minecraft:block/iron_block"
+    }
 }

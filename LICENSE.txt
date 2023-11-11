@@ -31,8 +31,8 @@ by Forge's license for the Mod code.
 === MCP Data ===
 This software includes data from the Minecraft Coder Pack (MCP), with kind permission
 from them. The license to MCP data is not transitive - distribution of this data by
-third parties requires independent licensing from the MCP team. This data is not
-redistributable without permission from the MCP team.
+third parties requires independent licensing from the MCP warTeam. This data is not
+redistributable without permission from the MCP warTeam.
 
 === Sharing ===
 I grant permission for some parts of FML to be redistributed outside the terms of the LGPL, for the benefit of

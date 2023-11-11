@@ -7,14 +7,13 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.entities.Player;
-import com.felipesantos.warmine.entities.Team;
+import com.felipesantos.warmine.entities.WarTeam;
 import com.felipesantos.warmine.entities.WarMineData;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JsonManipulator {
 
@@ -23,26 +22,26 @@ public class JsonManipulator {
     static {
         mapperJson.enable(SerializationFeature.INDENT_OUTPUT);
     }
-    public static List<Team> teamsCollect(){
-        List<Team> teams = new ArrayList<>();
+    public static List<WarTeam> teamsCollect(){
+        List<WarTeam> warTeams = new ArrayList<>();
         File jsonFile = FileManipuler.warmineJSONFile("teams.json");
         if(jsonFile.exists()){
             try {
                 JsonNode jsonNode = mapperJson.readTree(jsonFile);
                 for (JsonNode nodeTeam : jsonNode.get("teams")) {
-                    teams.add(JsonManipulator.teamCollect(nodeTeam));
+                    warTeams.add(JsonManipulator.teamCollect(nodeTeam));
                 }
-                return teams;
+                return warTeams;
             } catch (IOException | NullPointerException e) {
                 return new ArrayList<>();
             }
         } else {
-            return teams;
+            return warTeams;
         }
     }
 
-    private static Team teamCollect(JsonNode teamJson){
-        return new Team(teamJson.get("name").asText(),teamJson.get("score").asInt());
+    private static WarTeam teamCollect(JsonNode teamJson){
+        return new WarTeam(teamJson.get("name").asText(),teamJson.get("score").asInt());
     }
 
 
@@ -74,15 +73,15 @@ public class JsonManipulator {
         }
     }
 
-    public static void saveTeams(List<Team> teams){
+    public static void saveTeams(List<WarTeam> warTeams){
         ObjectNode rootNode = mapperJson.createObjectNode();
         ArrayNode teamsNode = mapperJson.createArrayNode();
         ObjectNode auxiliarNode;
 
-        for(Team team : teams){
+        for(WarTeam warTeam : warTeams){
             auxiliarNode = mapperJson.createObjectNode();
-            auxiliarNode.put("name",team.getName());
-            auxiliarNode.put("score",team.getScore());
+            auxiliarNode.put("name", warTeam.getName());
+            auxiliarNode.put("score", warTeam.getScore());
             teamsNode.add(auxiliarNode);
         }
 
@@ -114,5 +113,4 @@ public class JsonManipulator {
             e.printStackTrace();
         }
     }
-
 }

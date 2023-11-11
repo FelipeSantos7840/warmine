@@ -2,11 +2,11 @@ package com.felipesantos.warmine.entities;
 
 public class Player {
     private String name;
-    private Team team;
+    private WarTeam warTeam;
 
-    public Player(String name, Team team) {
+    public Player(String name, WarTeam warTeam) {
         this.name = name;
-        this.team = team;
+        this.warTeam = warTeam;
     }
 
     public Player(String name) {
@@ -21,11 +21,11 @@ public class Player {
         this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
+    public WarTeam getTeam() {
+        return warTeam;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeam(WarTeam warTeam) {
+        this.warTeam = warTeam;
     }
 }
