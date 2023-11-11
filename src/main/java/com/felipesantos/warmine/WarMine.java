@@ -38,6 +38,7 @@ public class WarMine
         WarMineItems.registerBus(eventBus);
         WarMineBlocks.registerBus(eventBus);
 
+
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         eventBus.addListener(this::processIMC);

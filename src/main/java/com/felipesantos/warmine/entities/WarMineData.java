@@ -1,5 +1,7 @@
 package com.felipesantos.warmine.entities;
 
+import net.minecraft.scoreboard.Team;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +52,28 @@ public class WarMineData {
             return null;
         } else {
             return teamsResult.get(0);
+        }
+    }
+
+    public boolean removeTeam(String name){
+        boolean teamRemoved = false;
+        for(WarTeam warTeam : warTeams){
+            if(warTeam.getName().equalsIgnoreCase(name)){
+                removeTeamOfPlayers(warTeam);
+                warTeams.remove(warTeam);
+                teamRemoved = true;
+            }
+        }
+        return teamRemoved;
+    }
+
+    public void removeTeamOfPlayers(WarTeam warTeam){
+        for(Player player : players){
+            if(player.getTeam() != null){
+                if(player.getTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                    player.setTeam(null);
+                }
+            }
         }
     }
 }
