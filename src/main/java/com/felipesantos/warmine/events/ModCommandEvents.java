@@ -2,6 +2,7 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.commands.PlayerAddCommand;
+import com.felipesantos.warmine.commands.PlayerRemoveCommand;
 import com.felipesantos.warmine.commands.TeamCreateCommand;
 import com.felipesantos.warmine.commands.TeamRemoveCommand;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -16,6 +17,7 @@ public class ModCommandEvents {
         new TeamCreateCommand(event.getDispatcher());
         new TeamRemoveCommand(event.getDispatcher());
         new PlayerAddCommand(event.getDispatcher());
+        new PlayerRemoveCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

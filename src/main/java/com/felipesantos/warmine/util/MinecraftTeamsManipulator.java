@@ -50,6 +50,16 @@ public class MinecraftTeamsManipulator {
         return player;
     }
 
+    public static boolean removePlayerTeam(Player player){
+        if(player.getTeam() != null){
+            MinecraftData.score.getTeam(player.getTeam().getName()).getMembershipCollection().remove(player.getName());
+            player.setTeam(null);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static Team existMinecraftTeam(String nameTeam){
         Team team = null;
         if(nameTeam != null){
