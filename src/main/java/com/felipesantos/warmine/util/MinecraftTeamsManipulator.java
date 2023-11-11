@@ -36,15 +36,18 @@ public class MinecraftTeamsManipulator {
         MinecraftData.warmine.removeTeam(nameTeam);
     }
 
-    public static void addPlayerTeam(String namePlayer,String nameTeam){
+    public static Player addPlayerTeam(String nameTeam,Player player) {
+
+        String namePlayer = player.getName();
+
         ScorePlayerTeam mineTeam = (ScorePlayerTeam) existMinecraftTeam(nameTeam);
-        WarTeam warTeam = existWarMineTeam(namePlayer);
-        if((mineTeam != null) && (warTeam != null)){
+        WarTeam warTeam = existWarMineTeam(nameTeam);
+
+        if ((mineTeam != null) && (warTeam != null)) {
             mineTeam.getMembershipCollection().add(namePlayer);
-            MinecraftData.warmine.getPlayers().add(new Player(namePlayer,warTeam));
-        } else {
-            MinecraftData.warmine.getPlayers().add(new Player(namePlayer,warTeam));
+            player.setTeam(warTeam);
         }
+        return player;
     }
 
     public static Team existMinecraftTeam(String nameTeam){

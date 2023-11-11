@@ -83,11 +83,11 @@ public class WarMineData {
 
     }
 
-    public boolean playerDataExist(String namePlayer){
-        boolean playerExist = false;
+    public Player playerDataExist(String namePlayer){
+        Player playerExist = null;
         for(Player player : players){
             if(player.getName().equalsIgnoreCase(namePlayer)){
-                playerExist = true;
+                playerExist = player;
             }
         }
         return playerExist;

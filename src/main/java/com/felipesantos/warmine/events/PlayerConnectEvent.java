@@ -2,6 +2,7 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.MinecraftData;
+import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarMineData;
 import com.felipesantos.warmine.util.FileManipuler;
 import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
@@ -43,8 +44,8 @@ public class PlayerConnectEvent {
         }
 
         String playerName = player.getName().getString();
-        if(!MinecraftData.warmine.playerDataExist(playerName)){
-            MinecraftTeamsManipulator.addPlayerTeam(playerName,null);
+        if(MinecraftData.warmine.playerDataExist(playerName) == null){
+            MinecraftData.warmine.getPlayers().add(MinecraftTeamsManipulator.addPlayerTeam(null,new Player(playerName)));
         }
     }
 }
