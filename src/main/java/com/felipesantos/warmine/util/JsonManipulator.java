@@ -96,9 +96,9 @@ public class JsonManipulator {
         int y = blockJson.get("y").asInt();
         int z = blockJson.get("z").asInt();
         if(MinecraftData.warmine.getTeams().isEmpty()){
-            return new CrownDataBlock(new Coordinate(x,y,z),WarMineData.getWarTeam(teamBlock),nameCapital);
-        } else {
             return new CrownDataBlock(new Coordinate(x,y,z),nameCapital);
+        } else {
+            return new CrownDataBlock(new Coordinate(x,y,z),WarMineData.getWarTeam(teamBlock),nameCapital);
         }
     }
 
@@ -126,7 +126,7 @@ public class JsonManipulator {
         for(Player player : players){
             auxiliarNode = mapperJson.createObjectNode();
             auxiliarNode.put("name",player.getName());
-            auxiliarNode.put("team_name",(player.getTeam()!=null?player.getTeam().getName():"NullTeam"));
+            auxiliarNode.put("team_name",(player.getWarTeam()!=null?player.getWarTeam().getName():"NullTeam"));
             playersNode.add(auxiliarNode);
         }
 

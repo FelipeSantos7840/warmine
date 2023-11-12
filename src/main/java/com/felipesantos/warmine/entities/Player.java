@@ -21,7 +21,7 @@ public class Player {
         this.name = name;
     }
 
-    public WarTeam getTeam() {
+    public WarTeam getWarTeam() {
         return warTeam;
     }
 

@@ -6,8 +6,6 @@ import com.felipesantos.warmine.entities.WarTeam;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,8 +49,8 @@ public class MinecraftTeamsManipulator {
     }
 
     public static boolean removePlayerTeam(Player player){
-        if(player.getTeam() != null){
-            MinecraftData.score.getTeam(player.getTeam().getName()).getMembershipCollection().remove(player.getName());
+        if(player.getWarTeam() != null){
+            MinecraftData.score.getTeam(player.getWarTeam().getName()).getMembershipCollection().remove(player.getName());
             player.setTeam(null);
             return true;
         } else {

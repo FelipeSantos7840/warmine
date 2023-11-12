@@ -1,6 +1,6 @@
 package com.felipesantos.warmine.entities;
 
-import net.minecraft.scoreboard.Team;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +76,10 @@ public class WarMineData {
         }
     }
 
+    public static CrownDataBlock getCapital(BlockPos pos){
+        return getCapital(new Coordinate(pos.getX(), pos.getY(), pos.getZ()));
+    }
+
     public boolean removeTeam(String name){
         boolean teamRemoved = false;
         List<WarTeam> teamsForDelete = new ArrayList<>();
@@ -94,8 +98,8 @@ public class WarMineData {
     public void removeTeamOfPlayers(WarTeam warTeam){
         if(!players.isEmpty()){
             for(Player player : players){
-                if(player.getTeam() != null){
-                    if(player.getTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                if(player.getWarTeam() != null){
+                    if(player.getWarTeam().getName().equalsIgnoreCase(warTeam.getName())){
                         player.setTeam(null);
                     }
                 }
