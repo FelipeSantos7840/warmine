@@ -1,10 +1,12 @@
 package com.felipesantos.warmine.block.custom;
 
+import com.felipesantos.warmine.entities.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
@@ -25,9 +27,11 @@ public class CrownBlock extends HorizontalBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if(!worldIn.isRemote()){
-            if(placer instanceof PlayerEntity){
-                
+        if(placer instanceof PlayerEntity){
+            Player player = WarMineData.getPlayer(placer.getName().getString());
+            if(player != null && player.getTeam() != null){
+                MinecraftData.warmine.getCapitals()
+                        .add(new CrownDataBlock(new Coordinate(pos.getX(),pos.getY(),pos.getZ()),player.getTeam()));
             }
         }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
@@ -35,7 +39,6 @@ public class CrownBlock extends HorizontalBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
@@ -48,10 +51,6 @@ public class CrownBlock extends HorizontalBlock {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
-    }
-
-    private int[] getCoordinatePos(BlockPos pos){
-        return new int[]{pos.getX(),pos.getY(), pos.getZ()};
     }
 
 }

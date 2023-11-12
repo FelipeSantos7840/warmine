@@ -16,6 +16,11 @@ public class CrownDataBlock {
         this.name = name;
     }
 
+    public CrownDataBlock(Coordinate coordinate, WarTeam warTeam) {
+        this.coordinate = coordinate;
+        this.warTeam = warTeam;
+    }
+
     public Coordinate getCoordinate() {
         return coordinate;
     }

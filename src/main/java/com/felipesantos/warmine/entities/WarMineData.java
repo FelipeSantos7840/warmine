@@ -46,13 +46,33 @@ public class WarMineData {
         this.capitals = capitals;
     }
 
-    public static WarTeam getTeam(String teamPlayer){
+    public static WarTeam getWarTeam(String teamPlayer){
         List<WarTeam> teamsResult = MinecraftData.warmine.getTeams().stream()
                 .filter((team)-> team.getName().equals(teamPlayer)).collect(Collectors.toList());
         if(teamsResult.size() != 1){
             return null;
         } else {
             return teamsResult.get(0);
+        }
+    }
+
+    public static Player getPlayer(String namePlayer){
+        List<Player> playersResult = MinecraftData.warmine.getPlayers().stream()
+                .filter((player)-> player.getName().equals(namePlayer)).collect(Collectors.toList());
+        if(playersResult.size() != 1){
+            return null;
+        } else {
+            return playersResult.get(0);
+        }
+    }
+
+    public static CrownDataBlock getCapital(Coordinate coordinate){
+        List<CrownDataBlock> capitalsResult = MinecraftData.warmine.getCapitals().stream()
+                .filter((capitals)-> capitals.getCoordinate().isSamePosition(coordinate)).collect(Collectors.toList());
+        if(capitalsResult.size() != 1){
+            return null;
+        } else {
+            return capitalsResult.get(0);
         }
     }
 

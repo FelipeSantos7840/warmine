@@ -24,7 +24,7 @@ public class TeamCreateCommand {
     }
 
     private int teamCreate(CommandSource source,String teamName) throws CommandSyntaxException {
-        if(WarMineData.getTeam(teamName) == null){
+        if(WarMineData.getWarTeam(teamName) == null){
             MinecraftTeamsManipulator.createNewMinecraftTeam(teamName);
             MinecraftData.warmine.getTeams().add(new WarTeam(teamName,WarMineData.INITIAL_SCORE));
             return 1;

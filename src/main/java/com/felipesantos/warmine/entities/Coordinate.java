@@ -14,6 +14,14 @@ public class Coordinate {
     public Coordinate() {
     }
 
+    public boolean isSamePosition(Coordinate coordinate){
+        boolean validate = false;
+        if(this.getX() == coordinate.getX() && this.getY() == coordinate.getY() && this.getZ() == coordinate.getZ()){
+            validate = true;
+        }
+        return validate;
+    }
+
     public int getX() {
         return x;
     }
