@@ -26,11 +26,13 @@ public class CrownPlaceEvent {
                     if (player.getWarTeam() == null) {
                         MinecraftData.world.destroyBlock(event.getPos(),true);
                     } else if (!player.getWarTeam().equals(crownBlock.getWarTeam())){
-                        if(!(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName()))){
+                        if(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName())){
                             BlockState block= event.getState();
                             if(!(block.getBlock() == Blocks.TNT || block.getBlock() == Blocks.LADDER)){
                                 MinecraftData.world.destroyBlock(event.getPos(),true);
                             }
+                        } else {
+                            MinecraftData.world.destroyBlock(event.getPos(),true);
                         }
                     }
                 }
