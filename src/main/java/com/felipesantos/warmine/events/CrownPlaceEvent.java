@@ -5,6 +5,8 @@ import com.felipesantos.warmine.entities.CrownDataBlock;
 import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarMineData;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,8 +23,15 @@ public class CrownPlaceEvent {
                 if (crownBlock != null) {
                     PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
                     Player player = WarMineData.getPlayer(playerEntity.getName().getString());
-                    if (player.getWarTeam() == null || !(player.getWarTeam().equals(crownBlock.getWarTeam()))) {
+                    if (player.getWarTeam() == null) {
                         MinecraftData.world.destroyBlock(event.getPos(),true);
+                    } else if (!player.getWarTeam().equals(crownBlock.getWarTeam())){
+                        if(!(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName()))){
+                            BlockState block= event.getState();
+                            if(!(block.getBlock() == Blocks.TNT || block.getBlock() == Blocks.LADDER)){
+                                MinecraftData.world.destroyBlock(event.getPos(),true);
+                            }
+                        }
                     }
                 }
             }

@@ -18,8 +18,12 @@ public class CrownAreaEvent {
             CrownDataBlock crownBlock = WarMineData.getCapitalInArea(event.getPos());
             if(crownBlock != null){
                 Player player = WarMineData.getPlayer(event.getPlayer().getName().getString());
-                if(player.getWarTeam() == null || !(player.getWarTeam().equals(crownBlock.getWarTeam()))){
+                if(player.getWarTeam() == null){
                     event.setCanceled(true);
+                } else if(!player.getWarTeam().equals(crownBlock.getWarTeam())){
+                    if(!(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName()))){
+                        event.setCanceled(true);
+                    }
                 }
             }
         }

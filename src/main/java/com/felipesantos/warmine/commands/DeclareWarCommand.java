@@ -20,7 +20,6 @@ public class DeclareWarCommand {
                                 .executes((command) -> {
                                     return declareWar(command.getSource(),StringArgumentType.getString(command, "teamToWar"));
                                 }))));
-
     }
 
     private int declareWar(CommandSource source,String teamToWar) throws CommandSyntaxException {
