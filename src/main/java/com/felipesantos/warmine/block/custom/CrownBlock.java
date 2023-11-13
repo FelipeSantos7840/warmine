@@ -27,14 +27,19 @@ public class CrownBlock extends HorizontalBlock {
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if(!worldIn.isRemote()) {
+            boolean isNotValide = true;
             if (placer instanceof PlayerEntity) {
                 Player player = WarMineData.getPlayer(placer.getName().getString());
                 if (player != null && player.getWarTeam() != null) {
-                    MinecraftData.warmine.getCapitals()
-                            .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
-                } else {
-                    worldIn.destroyBlock(pos, true);
+                    if(!(WarMineData.isAboutArea(pos))){
+                        MinecraftData.warmine.getCapitals()
+                                .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
+                        isNotValide = false;
+                    }
                 }
+            }
+            if(isNotValide){
+                worldIn.destroyBlock(pos, true);
             }
         }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);

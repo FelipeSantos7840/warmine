@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class WarMineData {
 
     public static final int INITIAL_SCORE = 0;
+    public static final int CROWN_RANGE = 64;
     private List<WarTeam> warTeams;
     private List<Player> players;
     private List<CrownDataBlock> capitals;
@@ -78,6 +79,44 @@ public class WarMineData {
 
     public static CrownDataBlock getCapital(BlockPos pos){
         return getCapital(new Coordinate(pos.getX(), pos.getY(), pos.getZ()));
+    }
+
+    public static CrownDataBlock getCapitalInArea(Coordinate coordinate){
+
+        List<CrownDataBlock> capitalsResult = MinecraftData.warmine.getCapitals().stream()
+                .filter((capital)-> capital.getCoordinate().inArea(capital.getRANGE_AREA(), coordinate)).collect(Collectors.toList());
+
+        if(capitalsResult.size() != 1){
+            if(capitalsResult.size() == 0){
+                return null;
+            } else {
+                throw new IllegalStateException("Two or more Crown Block in same Area");
+            }
+
+        } else{
+            return capitalsResult.get(0);
+        }
+    }
+
+    public static boolean isAboutArea(BlockPos pos){
+        boolean isAbout = false;
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+WarMineData.CROWN_RANGE,pos.getZ()-WarMineData.CROWN_RANGE)) != null){
+            isAbout = true;
+        }
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-WarMineData.CROWN_RANGE,pos.getZ()+WarMineData.CROWN_RANGE)) != null){
+            isAbout = true;
+        }
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+WarMineData.CROWN_RANGE,pos.getZ()+WarMineData.CROWN_RANGE)) != null){
+            isAbout = true;
+        }
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-WarMineData.CROWN_RANGE,pos.getZ()-WarMineData.CROWN_RANGE)) != null){
+            isAbout = true;
+        }
+        return isAbout;
+    }
+
+    public static CrownDataBlock getCapitalInArea(BlockPos pos){
+        return getCapitalInArea(new Coordinate(pos.getX(),pos.getY(), pos.getZ()));
     }
 
     public boolean removeTeam(String name){

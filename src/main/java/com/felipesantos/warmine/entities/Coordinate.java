@@ -1,5 +1,7 @@
 package com.felipesantos.warmine.entities;
 
+import java.sql.SQLOutput;
+
 public class Coordinate {
     private int x;
     private int y;
@@ -11,6 +13,11 @@ public class Coordinate {
         this.z = z;
     }
 
+    public Coordinate(int x, int z) {
+        this.x = x;
+        this.z = z;
+    }
+
     public Coordinate() {
     }
 
@@ -18,6 +25,16 @@ public class Coordinate {
         boolean validate = false;
         if(this.getX() == coordinate.getX() && this.getY() == coordinate.getY() && this.getZ() == coordinate.getZ()){
             validate = true;
+        }
+        return validate;
+    }
+
+    public boolean inArea(int range,Coordinate testCoord){
+        boolean validate = false;
+        if(testCoord.getX() >= (this.getX()-range) && testCoord.getX() <= (this.getX()+range)){
+            if(testCoord.getZ() >= (this.getZ()-range) && testCoord.getZ() <= (this.getZ()+range)){
+                validate = true;
+            }
         }
         return validate;
     }
@@ -44,5 +61,14 @@ public class Coordinate {
 
     public void setZ(int z) {
         this.z = z;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
     }
 }
