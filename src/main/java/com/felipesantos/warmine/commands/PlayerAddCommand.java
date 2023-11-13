@@ -5,6 +5,7 @@ import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
@@ -13,15 +14,16 @@ public class PlayerAddCommand {
     public PlayerAddCommand(CommandDispatcher<CommandSource> dispatcher){
         dispatcher.register(Commands.literal("warmine")
                 .then(Commands.literal("addPlayer")
-                        .then(Commands.argument("nameteam", StringArgumentType.string())
-                                .then(Commands.argument("playername",StringArgumentType.string()).executes((command) -> {
-                                    return addPlayer(command.getSource(),
-                                            StringArgumentType.getString(command, "nameteam"),
-                                            StringArgumentType.getString(command, "playername"));
+                        .requires(source -> source.hasPermissionLevel(4))
+                            .then(Commands.argument("nameteam", StringArgumentType.string())
+                                    .then(Commands.argument("playername",StringArgumentType.string()).executes((command) -> {
+                                        return addPlayer(command.getSource(),
+                                                StringArgumentType.getString(command, "nameteam"),
+                                                StringArgumentType.getString(command, "playername"));
                                 })))));
     }
 
-    private int addPlayer(CommandSource source,String nameTeam,String namePlayer) {
+    private int addPlayer(CommandSource source,String nameTeam,String namePlayer) throws CommandSyntaxException {
         Player player = MinecraftData.warmine.playerDataExist(namePlayer);
         if(player != null){
             if(player.getWarTeam() == null){

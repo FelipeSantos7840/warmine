@@ -24,7 +24,6 @@ public class CrownDataBlock extends CityBlock{
         this.warTeam = warTeam;
     }
 
-
     public Coordinate getCoordinate() {
         return coordinate;
     }

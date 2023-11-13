@@ -159,15 +159,12 @@ public class WarMineData {
         }
     }
 
-    public boolean removeTeamofWarTeams(WarTeam warTeam){
-        boolean teamRemoved = false;
+    public void removeTeamofWarTeams(WarTeam warTeam){
         if(!warTeams.isEmpty()){
             for(WarTeam warDataTeam : warTeams){
                 warDataTeam.getTeamsInWar().remove(warTeam.getName());
-                teamRemoved = true;
             }
         }
-        return teamRemoved;
     }
 
     public Player playerDataExist(String namePlayer){

@@ -3,6 +3,7 @@ package com.felipesantos.warmine.commands;
 import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
@@ -17,7 +18,7 @@ public class TeamRemoveCommand {
         }))));
     }
 
-    private int teamRemove(CommandSource source,String teamName){
+    private int teamRemove(CommandSource source,String teamName) throws CommandSyntaxException {
             MinecraftTeamsManipulator.removeDataTeam(teamName);
             source.sendFeedback(new StringTextComponent("Deleted Team!"),true);
             return 1;
