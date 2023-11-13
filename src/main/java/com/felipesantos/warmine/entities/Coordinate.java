@@ -1,7 +1,5 @@
 package com.felipesantos.warmine.entities;
 
-import java.sql.SQLOutput;
-
 public class Coordinate {
     private int x;
     private int y;
