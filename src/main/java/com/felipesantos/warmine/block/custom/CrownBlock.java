@@ -43,7 +43,6 @@ public class CrownBlock extends HorizontalBlock {
             }
         }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-
     }
 
     @Override

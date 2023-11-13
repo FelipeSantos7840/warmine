@@ -126,6 +126,7 @@ public class WarMineData {
                 if(warTeam.getName().equalsIgnoreCase(name)){
                     removeTeamOfPlayers(warTeam);
                     removeTeamOfCapitals(warTeam);
+                    removeTeamofWarTeams(warTeam);
                     teamsForDelete.add(warTeam);
                     teamRemoved = true;
                 }
@@ -156,6 +157,17 @@ public class WarMineData {
                 }
             }
         }
+    }
+
+    public boolean removeTeamofWarTeams(WarTeam warTeam){
+        boolean teamRemoved = false;
+        if(!warTeams.isEmpty()){
+            for(WarTeam warDataTeam : warTeams){
+                warDataTeam.getTeamsInWar().remove(warTeam.getName());
+                teamRemoved = true;
+            }
+        }
+        return teamRemoved;
     }
 
     public Player playerDataExist(String namePlayer){

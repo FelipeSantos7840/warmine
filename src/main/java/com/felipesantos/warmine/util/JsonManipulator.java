@@ -38,7 +38,15 @@ public class JsonManipulator {
     }
 
     private static WarTeam teamCollect(JsonNode teamJson){
-        return new WarTeam(teamJson.get("name").asText(),teamJson.get("score").asInt());
+        WarTeam warTeam = new WarTeam(teamJson.get("name").asText(),teamJson.get("score").asInt());
+        String teamInWarName;
+        for(JsonNode inWarTeam : teamJson.get("warteams_name")){
+            teamInWarName = inWarTeam.asText();
+            if(teamInWarName != null){
+                warTeam.addTeamInWar(teamInWarName);
+            }
+        }
+        return warTeam;
     }
 
 
@@ -105,12 +113,20 @@ public class JsonManipulator {
     public static void saveTeams(List<WarTeam> warTeams){
         ObjectNode rootNode = mapperJson.createObjectNode();
         ArrayNode teamsNode = mapperJson.createArrayNode();
+        ArrayNode teamsInWarNode;
         ObjectNode auxiliarNode;
 
         for(WarTeam warTeam : warTeams){
             auxiliarNode = mapperJson.createObjectNode();
             auxiliarNode.put("name", warTeam.getName());
             auxiliarNode.put("score", warTeam.getScore());
+
+            teamsInWarNode = mapperJson.createArrayNode();
+            for(String inWarTeam : warTeam.getTeamsInWar()){
+                teamsInWarNode.add(inWarTeam);
+            }
+
+            auxiliarNode.set("warteams_name",teamsInWarNode);
             teamsNode.add(auxiliarNode);
         }
 

@@ -1,14 +1,35 @@
 package com.felipesantos.warmine.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class WarTeam {
     private String name;
     private Integer score;
+    private List<String> teamsInWar;
+
 
     public WarTeam(String name, Integer score){
         this.name = name;
         this.score = score;
+        teamsInWar = new ArrayList<>();
+    }
+
+    public List<String> getTeamsInWar() {
+        return teamsInWar;
+    }
+
+    public boolean addTeamInWar(String nameTeam){
+        boolean validate = false;
+        if(teamsInWar.isEmpty()){
+            teamsInWar.add(nameTeam);
+            validate = true;
+        } else if(!(teamsInWar.contains(nameTeam))){
+            teamsInWar.add(nameTeam);
+            validate = true;
+        }
+        return validate;
     }
 
     public String getName() {
