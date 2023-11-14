@@ -14,6 +14,7 @@ public class WarMineData {
     private List<WarTeam> warTeams;
     private List<Player> players;
     private List<CrownDataBlock> capitals;
+    private List<CityDataBlock> cities;
 
     public WarMineData(List<WarTeam> warTeams, List<Player> players, List<CrownDataBlock> capitals) {
         this.warTeams = warTeams;
@@ -36,6 +37,10 @@ public class WarMineData {
         return capitals;
     }
 
+    public List<CityDataBlock> getCities() {
+        return cities;
+    }
+
     public void setTeams(List<WarTeam> warTeams) {
         this.warTeams = warTeams;
     }
@@ -46,6 +51,10 @@ public class WarMineData {
 
     public void setCapitals(List<CrownDataBlock> capitals) {
         this.capitals = capitals;
+    }
+
+    public void setCities(List<CityDataBlock> cities) {
+        this.cities = cities;
     }
 
     public static WarTeam getWarTeam(String teamPlayer){
@@ -99,6 +108,30 @@ public class WarMineData {
         }
     }
 
+    public static CrownDataBlock getCapitalInArea(BlockPos pos){
+        return getCapitalInArea(new Coordinate(pos.getX(),pos.getY(), pos.getZ()));
+    }
+
+    public static CityDataBlock getCityInArea(Coordinate coordinate){
+        List<CityDataBlock> citiesResult = MinecraftData.warmine.getCities().stream()
+                .filter((cities)->cities.getCoordinate().inArea(cities.getRANGE_AREA(), coordinate)).collect(Collectors.toList());
+
+        if(citiesResult.size() != 1){
+            if(citiesResult.size() == 0){
+                return null;
+            } else {
+                throw new IllegalStateException("Two or more Cities Block in same Area");
+            }
+
+        } else{
+            return citiesResult.get(0);
+        }
+    }
+
+    public static CityDataBlock getCityInArea(BlockPos pos){
+        return getCityInArea(new Coordinate(pos.getX(),pos.getY(), pos.getZ()));
+    }
+
     public static boolean isAboutArea(BlockPos pos){
         boolean isAbout = false;
         if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+WarMineData.CROWN_RANGE,pos.getZ()-WarMineData.CROWN_RANGE)) != null){
@@ -113,11 +146,29 @@ public class WarMineData {
         if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-WarMineData.CROWN_RANGE,pos.getZ()-WarMineData.CROWN_RANGE)) != null){
             isAbout = true;
         }
+
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()+WarMineData.CITY_RANGE,pos.getZ()-WarMineData.CITY_RANGE)) != null){
+            isAbout = true;
+        }
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()-WarMineData.CITY_RANGE,pos.getZ()+WarMineData.CITY_RANGE)) != null){
+            isAbout = true;
+        }
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()+WarMineData.CITY_RANGE,pos.getZ()+WarMineData.CITY_RANGE)) != null){
+            isAbout = true;
+        }
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()-WarMineData.CITY_RANGE,pos.getZ()-WarMineData.CITY_RANGE)) != null){
+            isAbout = true;
+        }
+
         return isAbout;
     }
 
-    public static CrownDataBlock getCapitalInArea(BlockPos pos){
-        return getCapitalInArea(new Coordinate(pos.getX(),pos.getY(), pos.getZ()));
+    public static AbstractCityBlock getTerritoryBlockInArea(BlockPos pos){
+        AbstractCityBlock territoryBlock = getCapitalInArea(pos);
+        if(territoryBlock == null){
+            territoryBlock = getCityInArea(pos);
+        }
+        return territoryBlock;
     }
 
     public static boolean teamAlreadyHaveACapital(WarTeam warTeam){

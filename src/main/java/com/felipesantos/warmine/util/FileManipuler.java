@@ -57,12 +57,14 @@ public class FileManipuler {
         warMineData.setTeams(JsonManipulator.teamsCollect());
         warMineData.setPlayers(JsonManipulator.playersCollect());
         warMineData.setCapitals(JsonManipulator.crownBlocksCollect());
+        warMineData.setCities(JsonManipulator.cityBlocksCollect());
     }
 
     public static void warmineSaveData(WarMineData warMineData){
         JsonManipulator.saveTeams(warMineData.getTeams());
         JsonManipulator.savePlayers(warMineData.getPlayers());
         JsonManipulator.saveCrownBlocks(warMineData.getCapitals());
+        JsonManipulator.saveCityBlocks(warMineData.getCities());
     }
 
     public static File warmineJSONFile(String fileName){

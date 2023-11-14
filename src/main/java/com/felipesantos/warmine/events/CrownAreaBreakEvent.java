@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.entities.AbstractCityBlock;
 import com.felipesantos.warmine.entities.CrownDataBlock;
 import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarMineData;
@@ -13,13 +14,13 @@ public class CrownAreaBreakEvent {
     @SubscribeEvent
     public static void onCrownAreaBreak(BlockEvent.BreakEvent event){
         if(!event.getWorld().isRemote()){
-            CrownDataBlock crownBlock = WarMineData.getCapitalInArea(event.getPos());
-            if(crownBlock != null){
+            AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(event.getPos());
+            if(territoryBlock != null){
                 Player player = WarMineData.getPlayer(event.getPlayer().getName().getString());
                 if(player.getWarTeam() == null){
                     event.setCanceled(true);
-                } else if(!player.getWarTeam().equals(crownBlock.getWarTeam())){
-                    if(!(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName()))){
+                } else if(!player.getWarTeam().equals(territoryBlock.getWarTeam())){
+                    if(!(player.getWarTeam().getTeamsInWar().contains(territoryBlock.getWarTeam().getName()))){
                         event.setCanceled(true);
                     }
                 }

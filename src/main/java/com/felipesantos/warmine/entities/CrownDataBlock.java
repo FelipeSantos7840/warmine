@@ -24,22 +24,6 @@ public class CrownDataBlock extends AbstractCityBlock {
         this.warTeam = warTeam;
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public WarTeam getWarTeam() {
-        return warTeam;
-    }
-
-    public void setWarTeam(WarTeam warTeam) {
-        this.warTeam = warTeam;
-    }
-
     public String getName() {
         return name;
     }

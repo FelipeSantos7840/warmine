@@ -1,10 +1,7 @@
 package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
-import com.felipesantos.warmine.entities.CrownDataBlock;
-import com.felipesantos.warmine.entities.MinecraftData;
-import com.felipesantos.warmine.entities.Player;
-import com.felipesantos.warmine.entities.WarMineData;
+import com.felipesantos.warmine.entities.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,14 +16,14 @@ public class CrownAreaPlaceEvent {
     public static void onCrownAreaPlace(BlockEvent.EntityPlaceEvent event){
         if(!event.getWorld().isRemote()){
             if(event.getEntity() instanceof PlayerEntity){
-                CrownDataBlock crownBlock = WarMineData.getCapitalInArea(event.getPos());
-                if (crownBlock != null) {
+                AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(event.getPos());
+                if (territoryBlock != null) {
                     PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
                     Player player = WarMineData.getPlayer(playerEntity.getName().getString());
                     if (player.getWarTeam() == null) {
                         MinecraftData.world.destroyBlock(event.getPos(),true);
-                    } else if (!player.getWarTeam().equals(crownBlock.getWarTeam())){
-                        if(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName())){
+                    } else if (!player.getWarTeam().equals(territoryBlock.getWarTeam())){
+                        if(player.getWarTeam().getTeamsInWar().contains(territoryBlock.getWarTeam().getName())){
                             BlockState block= event.getState();
                             if(!(block.getBlock() == Blocks.TNT || block.getBlock() == Blocks.LADDER || block.getBlock() == Blocks.SCAFFOLDING)){
                                 MinecraftData.world.destroyBlock(event.getPos(),true);

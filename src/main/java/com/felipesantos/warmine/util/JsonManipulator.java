@@ -19,6 +19,7 @@ public class JsonManipulator {
     static {
         mapperJson.enable(SerializationFeature.INDENT_OUTPUT);
     }
+
     public static List<WarTeam> teamsCollect(){
         List<WarTeam> warTeams = new ArrayList<>();
         File jsonFile = FileManipuler.warmineJSONFile("teams.json");
@@ -75,6 +76,38 @@ public class JsonManipulator {
             return new Player(name,null);
         } else {
             return new Player(name,WarMineData.getWarTeam(team_name));
+        }
+    }
+
+    public static List<CityDataBlock> cityBlocksCollect(){
+        List<CityDataBlock> cityBlocks = new ArrayList<>();
+        File jsonFile = FileManipuler.warmineJSONFile("city_block.json");
+
+        if(jsonFile.exists()){
+            try {
+                JsonNode jsonNode = mapperJson.readTree(jsonFile);
+                for(JsonNode nodeCityBlock : jsonNode.get("city_blocks")){
+                    cityBlocks.add(JsonManipulator.cityBlockCollect(nodeCityBlock));
+                }
+                return cityBlocks;
+            } catch (IOException | NullPointerException e){
+                return new ArrayList<>();
+            }
+        } else {
+            return cityBlocks;
+        }
+    }
+
+    private static CityDataBlock cityBlockCollect(JsonNode blockJson){
+        String teamBlock = blockJson.get("team_name").asText();
+        String nameCity = blockJson.get("city_name").asText();
+        int x = blockJson.get("x").asInt();
+        int y = blockJson.get("y").asInt();
+        int z = blockJson.get("z").asInt();
+        if(MinecraftData.warmine.getTeams().isEmpty()){
+            return new CityDataBlock(new Coordinate(x,y,z),nameCity);
+        } else {
+            return new CityDataBlock(new Coordinate(x,y,z),WarMineData.getWarTeam(teamBlock),nameCity);
         }
     }
 
@@ -168,6 +201,25 @@ public class JsonManipulator {
         rootNode.set("crown_blocks",blocksNode);
         JsonManipulator.writeJson("crown_block.json",rootNode);
 
+    }
+
+    public static void saveCityBlocks(List<CityDataBlock> cityBlocks){
+        ObjectNode rootNode = mapperJson.createObjectNode();
+        ArrayNode blocksNode = mapperJson.createArrayNode();
+        ObjectNode auxiliarNode;
+
+        for(CityDataBlock cityBlock : cityBlocks){
+            auxiliarNode = mapperJson.createObjectNode();
+            auxiliarNode.put("team_name",cityBlock.getWarTeam()!=null?cityBlock.getWarTeam().getName():"NullTeam");
+            auxiliarNode.put("city_name",cityBlock.getName());
+            auxiliarNode.put("x",cityBlock.getCoordinate().getX());
+            auxiliarNode.put("y",cityBlock.getCoordinate().getY());
+            auxiliarNode.put("z",cityBlock.getCoordinate().getZ());
+            blocksNode.add(auxiliarNode);
+        }
+
+        rootNode.set("city_blocks",blocksNode);
+        JsonManipulator.writeJson("city_block.json",rootNode);
     }
 
     private static void writeJson(String jsonName,ObjectNode rootNode){

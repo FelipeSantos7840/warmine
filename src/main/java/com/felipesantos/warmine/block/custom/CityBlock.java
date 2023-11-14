@@ -1,5 +1,6 @@
 package com.felipesantos.warmine.block.custom;
 
+import com.felipesantos.warmine.entities.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -12,6 +13,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -24,13 +26,28 @@ public class CityBlock extends HorizontalBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-
+        if(!worldIn.isRemote()) {
+            boolean isNotValide = true;
+            if(placer instanceof PlayerEntity){
+                Player player = WarMineData.getPlayer(placer.getName().getString());
+                if (player != null && player.getWarTeam() != null) {
+                    if(!(WarMineData.isAboutArea(pos))){
+                        MinecraftData.warmine.getCities()
+                                .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()),player.getWarTeam()));
+                        isNotValide = false;
+                    }
+                }
+            }
+            if(isNotValide){
+                worldIn.destroyBlock(pos, true);
+            }
+        }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-
+        player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Team: " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
