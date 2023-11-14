@@ -22,10 +22,17 @@ public class CrownBreakEvent {
                 PlayerEntity playerEntity = event.getPlayer();
                 Player player = WarMineData.getPlayer(playerEntity.getName().getString());
                 CrownDataBlock crownBlock = WarMineData.getCapital(event.getPos());
-                if(player.getWarTeam() == null || !(player.getWarTeam().equals(crownBlock.getWarTeam()))){
+                if(player.getWarTeam() == null){
                     event.setCanceled(true);
-                } else {
+                } else if(player.getWarTeam().equals(crownBlock.getWarTeam())){
                     MinecraftData.warmine.getCapitals().remove(crownBlock);
+                } else {
+                    boolean validate = player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName());
+                    if(validate){
+                        MinecraftData.warmine.getCapitals().remove(crownBlock);
+                    } else {
+                        event.setCanceled(true);
+                    }
                 }
             }
         }
