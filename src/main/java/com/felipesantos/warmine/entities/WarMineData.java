@@ -119,6 +119,16 @@ public class WarMineData {
         return getCapitalInArea(new Coordinate(pos.getX(),pos.getY(), pos.getZ()));
     }
 
+    public static boolean teamAlreadyHaveACapital(WarTeam warTeam){
+        boolean exist = false;
+        for(CrownDataBlock crown : MinecraftData.warmine.getCapitals()){
+            if(crown.getWarTeam().equals(warTeam)){
+                exist = true;
+            }
+        }
+        return exist;
+    }
+
     public boolean removeTeam(String name){
         boolean teamRemoved = false;
         List<WarTeam> teamsForDelete = new ArrayList<>();

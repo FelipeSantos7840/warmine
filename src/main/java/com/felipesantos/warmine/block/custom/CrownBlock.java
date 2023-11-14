@@ -13,6 +13,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -31,10 +33,12 @@ public class CrownBlock extends HorizontalBlock {
             if (placer instanceof PlayerEntity) {
                 Player player = WarMineData.getPlayer(placer.getName().getString());
                 if (player != null && player.getWarTeam() != null) {
-                    if(!(WarMineData.isAboutArea(pos))){
-                        MinecraftData.warmine.getCapitals()
-                                .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
-                        isNotValide = false;
+                    if(!(WarMineData.teamAlreadyHaveACapital(player.getWarTeam()))){
+                        if(!(WarMineData.isAboutArea(pos))){
+                            MinecraftData.warmine.getCapitals()
+                                    .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
+                            isNotValide = false;
+                        }
                     }
                 }
             }
@@ -47,6 +51,7 @@ public class CrownBlock extends HorizontalBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Capital of " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
