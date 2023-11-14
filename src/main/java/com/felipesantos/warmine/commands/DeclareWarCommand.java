@@ -1,9 +1,6 @@
 package com.felipesantos.warmine.commands;
 
-import com.felipesantos.warmine.entities.CrownDataBlock;
-import com.felipesantos.warmine.entities.Player;
-import com.felipesantos.warmine.entities.WarMineData;
-import com.felipesantos.warmine.entities.WarTeam;
+import com.felipesantos.warmine.entities.*;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -26,12 +23,12 @@ public class DeclareWarCommand {
         PlayerEntity playerEntity = source.asPlayer();
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
         if(player.getWarTeam() != null){
-            CrownDataBlock crownDataBlock = WarMineData.getCapitalInArea(playerEntity.getPosition());
-            if(crownDataBlock != null){
-                WarTeam teamWar = crownDataBlock.getWarTeam();
+            AbstractCityBlock territoryDataBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
+            if(territoryDataBlock != null){
+                WarTeam teamWar = territoryDataBlock.getWarTeam();
                 if(!teamWar.equals(player.getWarTeam())) {
-                    if (teamWar.getName().equalsIgnoreCase(teamToWar) && !(teamsAlreadyInWar(crownDataBlock.getWarTeam(), player.getWarTeam().getName()))) {
-                        crownDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
+                    if (teamWar.getName().equalsIgnoreCase(teamToWar) && !(teamsAlreadyInWar(territoryDataBlock.getWarTeam(), player.getWarTeam().getName()))) {
+                        territoryDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
                         player.getWarTeam().addTeamInWar(teamWar.getName());
                         source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
                         return 1;
