@@ -1,6 +1,6 @@
 package com.felipesantos.warmine.entities;
 
-public class CrownDataBlock extends CityBlock{
+public class CrownDataBlock extends AbstractCityBlock {
     private Coordinate coordinate;
     private WarTeam warTeam;
     private String name;

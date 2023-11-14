@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.block;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.block.custom.CityBlock;
 import com.felipesantos.warmine.block.custom.CrownBlock;
 import com.felipesantos.warmine.item.WarMineItems;
 import net.minecraft.block.AbstractBlock;
@@ -21,6 +22,9 @@ public class WarMineBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, WarMine.MOD_ID);
 
     public static final RegistryObject<Block> CROWN_BLOCK = registerBlock("crown_block", ()->new CrownBlock(AbstractBlock.Properties.create(Material.ROCK)
+            .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(3).hardnessAndResistance(12)));
+
+    public static final RegistryObject<Block> CITY_BLOCK = registerBlock("city_block", ()-> new CityBlock(AbstractBlock.Properties.create(Material.ROCK)
             .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(3).hardnessAndResistance(12)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block){

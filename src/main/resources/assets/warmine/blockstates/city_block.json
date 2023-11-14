@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "warmine:block/city_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "warmine:block/city_block"
+    },
+    "facing=south": {
+      "model": "warmine:block/city_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "warmine:block/city_block",
+      "y": 270
+    }
+  }
+}

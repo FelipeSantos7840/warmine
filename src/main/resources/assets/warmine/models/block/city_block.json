@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+    "textures": {
+      "north": "warmine:block/city_block",
+      "east": "warmine:block/city_block_side",
+      "south": "warmine:block/city_block_side",
+      "west": "warmine:block/city_block_side",
+      "up": "warmine:block/city_block_side",
+      "down": "warmine:block/city_block_side",
+      "particle": "minecraft:block/lapis_block"
+    }
+}
