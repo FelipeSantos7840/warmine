@@ -13,7 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = WarMine.MOD_ID)
-public class CrownPlaceEvent {
+public class CrownAreaPlaceEvent {
 
     @SubscribeEvent
     public static void onCrownAreaPlace(BlockEvent.EntityPlaceEvent event){
@@ -28,7 +28,7 @@ public class CrownPlaceEvent {
                     } else if (!player.getWarTeam().equals(crownBlock.getWarTeam())){
                         if(player.getWarTeam().getTeamsInWar().contains(crownBlock.getWarTeam().getName())){
                             BlockState block= event.getState();
-                            if(!(block.getBlock() == Blocks.TNT || block.getBlock() == Blocks.LADDER)){
+                            if(!(block.getBlock() == Blocks.TNT || block.getBlock() == Blocks.LADDER || block.getBlock() == Blocks.SCAFFOLDING)){
                                 MinecraftData.world.destroyBlock(event.getPos(),true);
                             }
                         } else {
