@@ -35,7 +35,7 @@ public class CrownBlock extends HorizontalBlock {
                 Player player = WarMineData.getPlayer(placer.getName().getString());
                 if (player != null && player.getWarTeam() != null) {
                     if(!(WarMineData.teamAlreadyHaveACapital(player.getWarTeam()))){
-                        if(!(WarMineData.isAboutArea(pos))){
+                        if(!(WarMineData.isAboutArea(pos,WarMineData.CROWN_RANGE))){
                             MinecraftData.warmine.getCapitals()
                                     .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
                             isNotValide = false;

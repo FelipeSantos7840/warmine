@@ -10,10 +10,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = WarMine.MOD_ID)
-public class CrownAreaPlaceEvent {
+public class TerritoryAreaPlaceEvent {
 
     @SubscribeEvent
-    public static void onCrownAreaPlace(BlockEvent.EntityPlaceEvent event){
+    public static void onTerritoryAreaPlace(BlockEvent.EntityPlaceEvent event){
         if(!event.getWorld().isRemote()){
             if(event.getEntity() instanceof PlayerEntity){
                 AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(event.getPos());

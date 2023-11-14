@@ -105,6 +105,14 @@ public class WarMineData {
         return getCity(new Coordinate(pos.getX(),pos.getY(),pos.getZ()));
     }
 
+    public static AbstractCityBlock getTerritoryBlock(BlockPos pos){
+        AbstractCityBlock abstractTerritoryBlock = getCapital(pos);
+        if(abstractTerritoryBlock == null){
+            abstractTerritoryBlock = getCity(pos);
+        }
+        return abstractTerritoryBlock;
+    }
+
     public static CrownDataBlock getCapitalInArea(Coordinate coordinate){
 
         List<CrownDataBlock> capitalsResult = MinecraftData.warmine.getCapitals().stream()
@@ -146,31 +154,31 @@ public class WarMineData {
         return getCityInArea(new Coordinate(pos.getX(),pos.getY(), pos.getZ()));
     }
 
-    public static boolean isAboutArea(BlockPos pos){
+    public static boolean isAboutArea(BlockPos pos,int range){
         boolean isAbout = false;
-        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+WarMineData.CROWN_RANGE,pos.getZ()-WarMineData.CROWN_RANGE)) != null){
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+range,pos.getZ()-range)) != null){
             isAbout = true;
         }
-        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-WarMineData.CROWN_RANGE,pos.getZ()+WarMineData.CROWN_RANGE)) != null){
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-range,pos.getZ()+range)) != null){
             isAbout = true;
         }
-        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+WarMineData.CROWN_RANGE,pos.getZ()+WarMineData.CROWN_RANGE)) != null){
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()+range,pos.getZ()+range)) != null){
             isAbout = true;
         }
-        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-WarMineData.CROWN_RANGE,pos.getZ()-WarMineData.CROWN_RANGE)) != null){
+        if(WarMineData.getCapitalInArea(new Coordinate(pos.getX()-range,pos.getZ()-range)) != null){
             isAbout = true;
         }
 
-        if(WarMineData.getCityInArea(new Coordinate(pos.getX()+WarMineData.CITY_RANGE,pos.getZ()-WarMineData.CITY_RANGE)) != null){
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()+range,pos.getZ()-range)) != null){
             isAbout = true;
         }
-        if(WarMineData.getCityInArea(new Coordinate(pos.getX()-WarMineData.CITY_RANGE,pos.getZ()+WarMineData.CITY_RANGE)) != null){
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()-range,pos.getZ()+range)) != null){
             isAbout = true;
         }
-        if(WarMineData.getCityInArea(new Coordinate(pos.getX()+WarMineData.CITY_RANGE,pos.getZ()+WarMineData.CITY_RANGE)) != null){
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()+range,pos.getZ()+range)) != null){
             isAbout = true;
         }
-        if(WarMineData.getCityInArea(new Coordinate(pos.getX()-WarMineData.CITY_RANGE,pos.getZ()-WarMineData.CITY_RANGE)) != null){
+        if(WarMineData.getCityInArea(new Coordinate(pos.getX()-range,pos.getZ()-range)) != null){
             isAbout = true;
         }
 

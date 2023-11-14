@@ -2,7 +2,6 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.AbstractCityBlock;
-import com.felipesantos.warmine.entities.CrownDataBlock;
 import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarMineData;
 import net.minecraftforge.event.world.BlockEvent;
@@ -10,9 +9,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = WarMine.MOD_ID)
-public class CrownAreaBreakEvent {
+public class TerritoryAreaBreakEvent {
     @SubscribeEvent
-    public static void onCrownAreaBreak(BlockEvent.BreakEvent event){
+    public static void onTerritoryAreaBreak(BlockEvent.BreakEvent event){
         if(!event.getWorld().isRemote()){
             AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(event.getPos());
             if(territoryBlock != null){
