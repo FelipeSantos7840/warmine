@@ -15,7 +15,7 @@ import net.minecraft.util.text.StringTextComponent;
 public class DeclareWarCommand {
     public DeclareWarCommand(CommandDispatcher<CommandSource> dispatcher){
         dispatcher.register(Commands.literal("warmine")
-                .then(Commands.literal("declarewar")
+                .then(Commands.literal("declareWar")
                         .then(Commands.argument("teamToWar", StringArgumentType.string())
                                 .executes((command) -> {
                                     return declareWar(command.getSource(),StringArgumentType.getString(command, "teamToWar"));
@@ -33,7 +33,7 @@ public class DeclareWarCommand {
                     if (teamWar.getName().equalsIgnoreCase(teamToWar) && !(teamsAlreadyInWar(crownDataBlock.getWarTeam(), player.getWarTeam().getName()))) {
                         crownDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
                         player.getWarTeam().addTeamInWar(teamWar.getName());
-                        source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " delcared War with " + teamWar.getName()), true);
+                        source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
                         return 1;
                     } else {
                         source.sendFeedback(new StringTextComponent("Teams already in war or territory is not the same of solicited!"), true);

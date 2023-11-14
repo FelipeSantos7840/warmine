@@ -12,6 +12,7 @@ public class ModCommandEvents {
     @SubscribeEvent
     public static void onCommandsRegister(RegisterCommandsEvent event) {
         new DeclareWarCommand(event.getDispatcher());
+        new LeavingWarCommand(event.getDispatcher());
         new TeamCreateCommand(event.getDispatcher());
         new TeamRemoveCommand(event.getDispatcher());
         new PlayerAddCommand(event.getDispatcher());
