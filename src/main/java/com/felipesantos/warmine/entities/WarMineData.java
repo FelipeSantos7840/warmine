@@ -91,6 +91,20 @@ public class WarMineData {
         return getCapital(new Coordinate(pos.getX(), pos.getY(), pos.getZ()));
     }
 
+    public static CityDataBlock getCity(Coordinate coordinate){
+        List<CityDataBlock> cityResult = MinecraftData.warmine.getCities().stream()
+                .filter((cities)->cities.getCoordinate().isSamePosition(coordinate)).collect(Collectors.toList());
+        if(cityResult.size() != 1){
+            return null;
+        } else {
+            return cityResult.get(0);
+        }
+    }
+
+    public static CityDataBlock getCity(BlockPos pos){
+        return getCity(new Coordinate(pos.getX(),pos.getY(),pos.getZ()));
+    }
+
     public static CrownDataBlock getCapitalInArea(Coordinate coordinate){
 
         List<CrownDataBlock> capitalsResult = MinecraftData.warmine.getCapitals().stream()

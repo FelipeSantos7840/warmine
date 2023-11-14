@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.block.custom;
 
 import com.felipesantos.warmine.entities.*;
+import com.felipesantos.warmine.util.FileManipuler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -47,7 +48,7 @@ public class CityBlock extends HorizontalBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Team: " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
+        player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCity(pos).getName()+"! Team: " + WarMineData.getCity(pos).getWarTeam().getName()),true);
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
