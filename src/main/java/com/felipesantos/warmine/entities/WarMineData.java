@@ -10,6 +10,7 @@ public class WarMineData {
 
     public static final int INITIAL_SCORE = 0;
     public static final int CROWN_RANGE = 64;
+    public static final int CITY_RANGE = 32;
     private List<WarTeam> warTeams;
     private List<Player> players;
     private List<CrownDataBlock> capitals;
@@ -158,14 +159,17 @@ public class WarMineData {
     }
 
     public void removeTeamOfCapitals(WarTeam warTeam){
+        CrownDataBlock crownForDelete= null;
         if(!capitals.isEmpty()){
             for(CrownDataBlock crownBlock : capitals){
                 if(crownBlock.getWarTeam() != null){
                     if(crownBlock.getWarTeam().getName().equalsIgnoreCase(warTeam.getName())){
-                        crownBlock.setWarTeam(null);
+                        MinecraftData.world.destroyBlock(crownBlock.getCoordinate().toBlockPos(), false);
+                        crownForDelete = crownBlock;
                     }
                 }
             }
+            capitals.remove(crownForDelete);
         }
     }
 

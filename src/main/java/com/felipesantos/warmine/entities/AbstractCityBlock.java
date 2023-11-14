@@ -1,5 +1,7 @@
 package com.felipesantos.warmine.entities;
 
+import net.minecraft.util.math.BlockPos;
+
 public abstract class AbstractCityBlock {
     private int RANGE_AREA;
 

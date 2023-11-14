@@ -1,5 +1,7 @@
 package com.felipesantos.warmine.entities;
 
+import net.minecraft.util.math.BlockPos;
+
 public class Coordinate {
     private int x;
     private int y;
@@ -35,6 +37,10 @@ public class Coordinate {
             }
         }
         return validate;
+    }
+
+    public BlockPos toBlockPos(){
+        return new BlockPos(x,y,z);
     }
 
     public int getX() {
