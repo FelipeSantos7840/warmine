@@ -80,10 +80,12 @@ public class CrownBlock extends HorizontalBlock {
                             player.inventory.deleteStack(itemStack);
                         }
                     }
+                    player.sendStatusMessage(new StringTextComponent("Team total points: " + warTeam.getScore()+"!"),true);
+                } else {
+                    player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Capital of " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
                 }
             }
         }
-        player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Capital of " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
@@ -125,7 +127,7 @@ public class CrownBlock extends HorizontalBlock {
         if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK){
             return validateItemQuantity(itemStack,32,15,warTeam);
         } else if(item == Items.DIAMOND_BLOCK){
-            return validateItemQuantity(itemStack,16,10,warTeam);
+            return validateItemQuantity(itemStack,16,15,warTeam);
         } else if(item == Items.NETHERITE_BLOCK){
             return validateItemQuantity(itemStack,5,30,warTeam);
         }
