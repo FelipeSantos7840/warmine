@@ -35,6 +35,8 @@ public class LeavingWarCommand {
                 } else {
                     source.sendFeedback(new StringTextComponent(teamToStopWar + " is not localized!"), true);
                 }
+            } else {
+                source.sendFeedback(new StringTextComponent("Leaving war cost 15 points!!"),true);
             }
         } else {
             source.sendFeedback(new StringTextComponent("You need a team firts!"),true);

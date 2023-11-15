@@ -34,8 +34,9 @@ public class DeclareWarCommand {
                             player.getWarTeam().addTeamInWar(teamWar.getName());
                             source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
                             return 1;
+                        } else {
+                            source.sendFeedback(new StringTextComponent("Declare war cost 30 points!!"),true);
                         }
-
                     } else {
                         source.sendFeedback(new StringTextComponent("Teams already in war or territory is not the same of solicited!"), true);
                     }

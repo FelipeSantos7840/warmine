@@ -38,6 +38,8 @@ public class CityBlock extends HorizontalBlock {
                                     .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()),player.getWarTeam()));
                             player.getWarTeam().decrementScore(40);
                             isNotValide = false;
+                        } else {
+                            ((PlayerEntity) placer).sendStatusMessage(new StringTextComponent("Place a city cost 15 points!!"),true);
                         }
                     }
                 }
