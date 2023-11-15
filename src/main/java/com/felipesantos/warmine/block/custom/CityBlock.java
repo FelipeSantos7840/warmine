@@ -33,9 +33,12 @@ public class CityBlock extends HorizontalBlock {
                 Player player = WarMineData.getPlayer(placer.getName().getString());
                 if (player != null && player.getWarTeam() != null) {
                     if(!(WarMineData.isAboutArea(pos,WarMineData.CITY_RANGE))){
-                        MinecraftData.warmine.getCities()
-                                .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()),player.getWarTeam()));
-                        isNotValide = false;
+                        if(player.getWarTeam().getScore() >= 40){
+                            MinecraftData.warmine.getCities()
+                                    .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()),player.getWarTeam()));
+                            player.getWarTeam().decrementScore(40);
+                            isNotValide = false;
+                        }
                     }
                 }
             }
