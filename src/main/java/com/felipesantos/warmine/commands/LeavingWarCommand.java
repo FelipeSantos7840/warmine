@@ -25,13 +25,16 @@ public class LeavingWarCommand {
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
 
         if(player.getWarTeam() != null){
-            boolean validate = player.getWarTeam().getTeamsInWar().remove(teamToStopWar);
-            if(validate){
-                WarMineData.getWarTeam(teamToStopWar).getTeamsInWar().remove(player.getWarTeam().getName());
-                source.sendFeedback(new StringTextComponent(player.getWarTeam().getName()+" retired of war with "+ teamToStopWar+"!"),true);
-                return 1;
-            } else {
-                source.sendFeedback(new StringTextComponent(teamToStopWar+" is not localized!"),true);
+            if(player.getWarTeam().getScore() >= 15) {
+                boolean validate = player.getWarTeam().getTeamsInWar().remove(teamToStopWar);
+                if (validate) {
+                    WarMineData.getWarTeam(teamToStopWar).getTeamsInWar().remove(player.getWarTeam().getName());
+                    player.getWarTeam().decrementScore(15);
+                    source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " retired of war with " + teamToStopWar + "!"), true);
+                    return 1;
+                } else {
+                    source.sendFeedback(new StringTextComponent(teamToStopWar + " is not localized!"), true);
+                }
             }
         } else {
             source.sendFeedback(new StringTextComponent("You need a team firts!"),true);

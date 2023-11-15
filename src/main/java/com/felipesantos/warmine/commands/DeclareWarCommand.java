@@ -28,10 +28,14 @@ public class DeclareWarCommand {
                 WarTeam teamWar = territoryDataBlock.getWarTeam();
                 if(!teamWar.equals(player.getWarTeam())) {
                     if (teamWar.getName().equalsIgnoreCase(teamToWar) && !(teamsAlreadyInWar(territoryDataBlock.getWarTeam(), player.getWarTeam().getName()))) {
-                        territoryDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
-                        player.getWarTeam().addTeamInWar(teamWar.getName());
-                        source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
-                        return 1;
+                        if(player.getWarTeam().getScore() >= 30){
+                            player.getWarTeam().decrementScore(30);
+                            territoryDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
+                            player.getWarTeam().addTeamInWar(teamWar.getName());
+                            source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
+                            return 1;
+                        }
+
                     } else {
                         source.sendFeedback(new StringTextComponent("Teams already in war or territory is not the same of solicited!"), true);
                     }
