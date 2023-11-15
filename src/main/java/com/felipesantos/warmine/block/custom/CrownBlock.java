@@ -123,9 +123,9 @@ public class CrownBlock extends HorizontalBlock {
     private int isOreItem(ItemStack itemStack,WarTeam warTeam) {
         Item item = itemStack.getItem();
         if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK){
-            return validateItemQuantity(itemStack,32,10,warTeam);
+            return validateItemQuantity(itemStack,32,15,warTeam);
         } else if(item == Items.DIAMOND_BLOCK){
-            return validateItemQuantity(itemStack,16,8,warTeam);
+            return validateItemQuantity(itemStack,16,10,warTeam);
         } else if(item == Items.NETHERITE_BLOCK){
             return validateItemQuantity(itemStack,5,30,warTeam);
         }
@@ -137,7 +137,7 @@ public class CrownBlock extends HorizontalBlock {
         if (item == Items.DRAGON_EGG) {
             return validateItemQuantity(itemStack,1,50,warTeam);
         } else if(item == Items.NETHER_STAR){
-            return validateItemQuantity(itemStack,1,55,warTeam);
+            return validateItemQuantity(itemStack,1,60,warTeam);
         }
         return -1;
     }
