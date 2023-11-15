@@ -87,6 +87,17 @@ public class WarMineData {
         }
     }
 
+    public static CrownDataBlock getCapital(WarTeam warTeam){
+        List<CrownDataBlock> capitalsResult = MinecraftData.warmine.getCapitals().stream()
+                .filter((capitals) -> capitals.getWarTeam().equals(warTeam)).collect(Collectors.toList());
+
+        if(capitalsResult.size() != 1){
+            return null;
+        } else {
+            return capitalsResult.get(0);
+        }
+    }
+
     public static CrownDataBlock getCapital(BlockPos pos){
         return getCapital(new Coordinate(pos.getX(), pos.getY(), pos.getZ()));
     }

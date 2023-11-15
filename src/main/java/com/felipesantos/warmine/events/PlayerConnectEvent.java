@@ -8,6 +8,7 @@ import com.felipesantos.warmine.util.FileManipuler;
 import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,7 +37,7 @@ public class PlayerConnectEvent {
                     FileManipuler.warmineCollectData(MinecraftData.warmine);
                 }
 
-                event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome to the §6 Warminer §r!"),true);
+                event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome! Warmine is working"),true);
             } else {
                 event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome! Failed locate World!"),true);
             }

@@ -17,6 +17,9 @@ public class ModCommandEvents {
         new TeamRemoveCommand(event.getDispatcher());
         new PlayerAddCommand(event.getDispatcher());
         new PlayerRemoveCommand(event.getDispatcher());
+        new ToCapitalCommand(event.getDispatcher());
+        new GetBlockInAreaCommand(event.getDispatcher());
+        new TerritoryCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
