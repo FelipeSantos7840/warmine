@@ -211,6 +211,7 @@ public class WarMineData {
                     removeTeamOfPlayers(warTeam);
                     removeTeamOfCapitals(warTeam);
                     removeTeamofWarTeams(warTeam);
+                    removeTeamOfCity(warTeam);
                     teamsForDelete.add(warTeam);
                     teamRemoved = true;
                 }
@@ -244,6 +245,21 @@ public class WarMineData {
             }
             capitals.remove(crownForDelete);
         }
+    }
+
+    public void removeTeamOfCity(WarTeam warTeam){
+        CityDataBlock cityForRemove = null;
+        if(!cities.isEmpty()){
+            for(CityDataBlock cityBlock : cities){
+                if(cityBlock.getWarTeam() != null){
+                    if(cityBlock.getWarTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                        MinecraftData.world.destroyBlock(cityBlock.getCoordinate().toBlockPos(), false);
+                        cityForRemove = cityBlock;
+                    }
+                }
+            }
+        }
+        cities.remove(cityForRemove);
     }
 
     public void removeTeamofWarTeams(WarTeam warTeam){
