@@ -108,8 +108,12 @@ public class CrownBlock extends HorizontalBlock {
 
     private int isAnimalItem(ItemStack itemStack,WarTeam warTeam){
         Item item = itemStack.getItem();
-        if(item == Items.BEEF || item == Items.CHICKEN || item == Items.PORKCHOP){
+        if(item == Items.BEEF){
+            return validateItemQuantity(itemStack,64,4,warTeam);
+        } else if(item == Items.CHICKEN || item == Items.PORKCHOP){
             return validateItemQuantity(itemStack,64,5,warTeam);
+        } else if(item == Items.LEATHER){
+            return validateItemQuantity(itemStack,64,3,warTeam);
         }
         return -1;
     }
@@ -145,7 +149,7 @@ public class CrownBlock extends HorizontalBlock {
         if (item == Items.DRAGON_EGG) {
             return validateItemQuantity(itemStack,1,50,warTeam);
         } else if(item == Items.NETHER_STAR){
-            return validateItemQuantity(itemStack,1,60,warTeam);
+            return validateItemQuantity(itemStack,1,35,warTeam);
         }
         return -1;
     }
