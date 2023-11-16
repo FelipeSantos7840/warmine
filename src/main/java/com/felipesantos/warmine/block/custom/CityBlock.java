@@ -5,21 +5,26 @@ import com.felipesantos.warmine.util.FileManipuler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.material.PushReaction;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.extensions.IForgeBlock;
 
 import javax.annotation.Nullable;
 
-public class CityBlock extends HorizontalBlock {
+public class CityBlock extends HorizontalBlock implements IForgeBlock {
 
     public CityBlock(Properties builder) {
         super(builder);
@@ -39,7 +44,7 @@ public class CityBlock extends HorizontalBlock {
                             player.getWarTeam().decrementScore(40);
                             isNotValide = false;
                         } else {
-                            ((PlayerEntity) placer).sendStatusMessage(new StringTextComponent("Place a city cost 15 points!!"),true);
+                            ((PlayerEntity) placer).sendStatusMessage(new StringTextComponent("Place a city cost 40 points!!"),true);
                         }
                     }
                 }
@@ -65,5 +70,10 @@ public class CityBlock extends HorizontalBlock {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
+    @Override
+    public PushReaction getPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
     }
 }
