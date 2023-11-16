@@ -22,6 +22,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +88,7 @@ public class CrownBlock extends HorizontalBlock {
                 } else {
                     player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Capital of " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
                 }
+                FileManipuler.warmineSaveData(MinecraftData.warmine);
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
