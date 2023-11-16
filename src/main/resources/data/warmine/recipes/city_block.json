@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#Y#",
+    "XGX"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lapis_block"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    },
+    "Y": {
+      "item": "minecraft:quartz_block"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "warmine:city_block",
+    "count": 1
+  }
+}
