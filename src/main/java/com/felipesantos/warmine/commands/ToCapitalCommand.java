@@ -7,6 +7,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 
 public class ToCapitalCommand {
     public ToCapitalCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -16,19 +17,23 @@ public class ToCapitalCommand {
     }
 
     private int toCapital(CommandSource source) throws CommandSyntaxException {
-        PlayerEntity playerEntity =source.asPlayer();
+        PlayerEntity playerEntity = source.asPlayer();
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
         WarTeam playerWarTeam = player.getWarTeam();
-        if(playerWarTeam != null){
-            if(WarMineData.teamAlreadyHaveACapital(playerWarTeam)){
+        if(World.OVERWORLD == playerEntity.world.getDimensionKey()) {
+            if (playerWarTeam != null) {
+                if (WarMineData.teamAlreadyHaveACapital(playerWarTeam)) {
 
-                CrownDataBlock crownDataBlock = WarMineData.getCapital(playerWarTeam);
-                Coordinate crownCoordinate = crownDataBlock.getCoordinate();
+                    CrownDataBlock crownDataBlock = WarMineData.getCapital(playerWarTeam);
+                    Coordinate crownCoordinate = crownDataBlock.getCoordinate();
 
-                playerEntity.setPositionAndUpdate(crownCoordinate.getX(),crownCoordinate.getY(),crownCoordinate.getZ());
-                playerEntity.sendStatusMessage(new StringTextComponent("Welcome to the "+crownDataBlock.getName()),true);
-                return 1;
+                    playerEntity.setPositionAndUpdate(crownCoordinate.getX(), crownCoordinate.getY(), crownCoordinate.getZ());
+                    playerEntity.sendStatusMessage(new StringTextComponent("Welcome to the " + crownDataBlock.getName()), true);
+                    return 1;
+                }
             }
+        } else {
+            source.sendFeedback(new StringTextComponent("toCapital is available only Overworld"), true);
         }
         return -1;
     }

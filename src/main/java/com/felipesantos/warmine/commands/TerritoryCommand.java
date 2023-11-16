@@ -10,6 +10,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 
 public class TerritoryCommand {
     public TerritoryCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -23,13 +24,17 @@ public class TerritoryCommand {
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
 
         AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
-        if(territoryBlock != null){
-            if(territoryBlock.getWarTeam() != null){
-                source.sendFeedback(new StringTextComponent(territoryBlock.getWarTeam().getName()+" Territory!!"),true);
-                return 1;
+        if(World.OVERWORLD == playerEntity.world.getDimensionKey()) {
+            if (territoryBlock != null) {
+                if (territoryBlock.getWarTeam() != null) {
+                    source.sendFeedback(new StringTextComponent(territoryBlock.getWarTeam().getName() + " Territory!!"), true);
+                    return 1;
+                }
+            } else {
+                source.sendFeedback(new StringTextComponent("It is not a conquered territory"), true);
             }
         } else {
-            source.sendFeedback(new StringTextComponent("It is not a conquered territory"),true);
+            source.sendFeedback(new StringTextComponent("isTerritory is available only Overworld"), true);
         }
         return -1;
     }
