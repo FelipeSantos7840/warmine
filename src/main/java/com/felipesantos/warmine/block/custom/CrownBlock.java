@@ -116,6 +116,8 @@ public class CrownBlock extends HorizontalBlock {
             return validateItemQuantity(itemStack,64,5,warTeam);
         } else if(item == Items.LEATHER){
             return validateItemQuantity(itemStack,64,3,warTeam);
+        } else if(item == Items.EGG){
+            return validateItemQuantity(itemStack, 16, 1, warTeam);
         }
         return -1;
     }
