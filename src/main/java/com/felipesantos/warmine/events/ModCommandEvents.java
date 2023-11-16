@@ -20,6 +20,7 @@ public class ModCommandEvents {
         new ToCapitalCommand(event.getDispatcher());
         new GetBlockInAreaCommand(event.getDispatcher());
         new TerritoryCommand(event.getDispatcher());
+        new NameTerritoryCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

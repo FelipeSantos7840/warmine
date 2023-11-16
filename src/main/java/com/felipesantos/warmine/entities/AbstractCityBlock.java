@@ -6,6 +6,7 @@ public abstract class AbstractCityBlock {
     private int RANGE_AREA;
     protected Coordinate coordinate;
     protected WarTeam warTeam;
+    protected String name;
 
     protected void defineRange(int range){
         RANGE_AREA = range;
@@ -29,6 +30,14 @@ public abstract class AbstractCityBlock {
 
     public void setWarTeam(WarTeam warTeam) {
         this.warTeam = warTeam;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

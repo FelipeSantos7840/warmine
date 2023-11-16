@@ -21,7 +21,6 @@ public class TerritoryCommand {
     private int isTerritory(CommandSource source) throws CommandSyntaxException {
         PlayerEntity playerEntity = source.asPlayer();
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
-        WarTeam playerWarTeam = player.getWarTeam();
 
         AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
         if(territoryBlock != null){
