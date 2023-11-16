@@ -4,6 +4,7 @@ import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.AbstractCityBlock;
 import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarMineData;
+import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,14 +14,16 @@ public class TerritoryAreaBreakEvent {
     @SubscribeEvent
     public static void onTerritoryAreaBreak(BlockEvent.BreakEvent event){
         if(!event.getWorld().isRemote()){
-            AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(event.getPos());
-            if(territoryBlock != null){
-                Player player = WarMineData.getPlayer(event.getPlayer().getName().getString());
-                if(player.getWarTeam() == null){
-                    event.setCanceled(true);
-                } else if(!player.getWarTeam().equals(territoryBlock.getWarTeam())){
-                    if(!(player.getWarTeam().getTeamsInWar().contains(territoryBlock.getWarTeam().getName()))){
+            if(World.OVERWORLD == event.getPlayer().world.getDimensionKey()) {
+                AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(event.getPos());
+                if (territoryBlock != null) {
+                    Player player = WarMineData.getPlayer(event.getPlayer().getName().getString());
+                    if (player.getWarTeam() == null) {
                         event.setCanceled(true);
+                    } else if (!player.getWarTeam().equals(territoryBlock.getWarTeam())) {
+                        if (!(player.getWarTeam().getTeamsInWar().contains(territoryBlock.getWarTeam().getName()))) {
+                            event.setCanceled(true);
+                        }
                     }
                 }
             }
