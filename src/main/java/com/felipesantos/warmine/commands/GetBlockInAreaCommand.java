@@ -7,6 +7,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 
 public class GetBlockInAreaCommand {
     public GetBlockInAreaCommand(CommandDispatcher<CommandSource> dispatcher) {
@@ -21,15 +22,19 @@ public class GetBlockInAreaCommand {
         WarTeam playerWarTeam = player.getWarTeam();
 
         if(playerWarTeam != null){
-            AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
-            if(territoryBlock != null){
-                Coordinate coordinate = territoryBlock.getCoordinate();
-                source.sendFeedback(
-                        new StringTextComponent("The Territory Block Position: X:" + coordinate.getX()
-                                + ", Y: " + coordinate.getY()
-                                + ", Z: " + coordinate.getZ()),true);
+            if(World.OVERWORLD == playerEntity.world.getDimensionKey()) {
+                AbstractCityBlock territoryBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
+                if (territoryBlock != null) {
+                    Coordinate coordinate = territoryBlock.getCoordinate();
+                    source.sendFeedback(
+                            new StringTextComponent("The Territory Block Position: X:" + coordinate.getX()
+                                    + ", Y: " + coordinate.getY()
+                                    + ", Z: " + coordinate.getZ()), true);
+                } else {
+                    source.sendFeedback(new StringTextComponent("It is not a conquered territory"), true);
+                }
             } else {
-                source.sendFeedback(new StringTextComponent("It is not a conquered territory"), true);
+                source.sendFeedback(new StringTextComponent("You need to be in the Overworld to get Block Position!"),true);
             }
         }
         return -1;
