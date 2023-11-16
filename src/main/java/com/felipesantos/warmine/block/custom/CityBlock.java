@@ -35,16 +35,18 @@ public class CityBlock extends HorizontalBlock implements IForgeBlock {
         if(!worldIn.isRemote()) {
             boolean isNotValide = true;
             if(placer instanceof PlayerEntity){
-                Player player = WarMineData.getPlayer(placer.getName().getString());
-                if (player != null && player.getWarTeam() != null) {
-                    if(!(WarMineData.isAboutArea(pos,WarMineData.CITY_RANGE))){
-                        if(player.getWarTeam().getScore() >= 40){
-                            MinecraftData.warmine.getCities()
-                                    .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()),player.getWarTeam()));
-                            player.getWarTeam().decrementScore(40);
-                            isNotValide = false;
-                        } else {
-                            ((PlayerEntity) placer).sendStatusMessage(new StringTextComponent("Place a city cost 40 points!!"),true);
+                if(World.OVERWORLD == placer.world.getDimensionKey()) {
+                    Player player = WarMineData.getPlayer(placer.getName().getString());
+                    if (player != null && player.getWarTeam() != null) {
+                        if (!(WarMineData.isAboutArea(pos, WarMineData.CITY_RANGE))) {
+                            if (player.getWarTeam().getScore() >= 40) {
+                                MinecraftData.warmine.getCities()
+                                        .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
+                                player.getWarTeam().decrementScore(40);
+                                isNotValide = false;
+                            } else {
+                                ((PlayerEntity) placer).sendStatusMessage(new StringTextComponent("Place a city cost 40 points!!"), true);
+                            }
                         }
                     }
                 }
