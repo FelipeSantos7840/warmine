@@ -2,6 +2,7 @@ package com.felipesantos.warmine.block.custom;
 
 import com.felipesantos.warmine.entities.*;
 import com.felipesantos.warmine.util.FileManipuler;
+import com.felipesantos.warmine.util.SellItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -67,16 +68,7 @@ public class CrownBlock extends HorizontalBlock {
                 if (warTeam.equals(crownBlock.getWarTeam())) {
                     int shrinkValue;
                     for (ItemStack itemStack : player.inventory.mainInventory) {
-                        shrinkValue = isAnimalItem(itemStack,warTeam);
-                        if(shrinkValue == -1){
-                            shrinkValue = isFarmItem(itemStack,warTeam);
-                            if(shrinkValue == -1){
-                                shrinkValue = isOreItem(itemStack,warTeam);
-                                if(shrinkValue == -1){
-                                    shrinkValue = isBossItem(itemStack,warTeam);
-                                }
-                            }
-                        }
+                        shrinkValue = SellItems.sellItem(itemStack,warTeam);
                         if(shrinkValue != -1){
                             itemStack.shrink(shrinkValue);
                         }
@@ -108,67 +100,5 @@ public class CrownBlock extends HorizontalBlock {
     @Override
     public PushReaction getPushReaction(BlockState state) {
         return PushReaction.BLOCK;
-    }
-
-    private int isAnimalItem(ItemStack itemStack,WarTeam warTeam){
-        Item item = itemStack.getItem();
-        if(item == Items.BEEF){
-            return validateItemQuantity(itemStack,64,4,warTeam);
-        } else if(item == Items.CHICKEN || item == Items.PORKCHOP){
-            return validateItemQuantity(itemStack,64,5,warTeam);
-        } else if(item == Items.LEATHER){
-            return validateItemQuantity(itemStack,64,3,warTeam);
-        } else if(item == Items.EGG){
-            return validateItemQuantity(itemStack, 16, 1, warTeam);
-        }
-        return -1;
-    }
-
-    private int isFarmItem(ItemStack itemStack,WarTeam warTeam){
-        Item item = itemStack.getItem();
-        if(item == Items.HAY_BLOCK){
-            return validateItemQuantity(itemStack,32,7,warTeam);
-        } else if (item == Items.CARROT || item == Items.POTATO || item == Items.BAMBOO || item == Items.CACTUS || item == Items.SUGAR_CANE || item == Items.BEETROOT){
-            return validateItemQuantity(itemStack,64,3,warTeam);
-        } else if (item == Items.NETHER_WART){
-            return validateItemQuantity(itemStack,64,7,warTeam);
-        } else if (item == Items.BROWN_MUSHROOM || item == Items.RED_MUSHROOM){
-            return validateItemQuantity(itemStack,32,5,warTeam);
-        } else if (item == Items.PUMPKIN){
-            return validateItemQuantity(itemStack,64,4,warTeam);
-        }
-        return -1;
-    }
-
-    private int isOreItem(ItemStack itemStack,WarTeam warTeam) {
-        Item item = itemStack.getItem();
-        if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK){
-            return validateItemQuantity(itemStack,32,15,warTeam);
-        } else if(item == Items.REDSTONE_BLOCK){
-            return validateItemQuantity(itemStack,64,9,warTeam);
-        }else if(item == Items.DIAMOND_BLOCK){
-            return validateItemQuantity(itemStack,16,15,warTeam);
-        } else if(item == Items.NETHERITE_BLOCK){
-            return validateItemQuantity(itemStack,5,30,warTeam);
-        }
-        return -1;
-    }
-
-    private int isBossItem(ItemStack itemStack,WarTeam warTeam){
-        Item item = itemStack.getItem();
-        if (item == Items.DRAGON_EGG) {
-            return validateItemQuantity(itemStack,1,50,warTeam);
-        } else if(item == Items.NETHER_STAR){
-            return validateItemQuantity(itemStack,1,35,warTeam);
-        }
-        return -1;
-    }
-
-    private int validateItemQuantity(ItemStack itemStack,int condition,int incrementQuantity, WarTeam warTeam){
-        if(itemStack.getCount() >= condition){
-            warTeam.incrementScore(incrementQuantity);
-            return condition;
-        }
-        return -1;
     }
 }
