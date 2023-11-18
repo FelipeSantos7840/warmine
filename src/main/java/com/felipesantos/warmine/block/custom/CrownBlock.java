@@ -133,7 +133,7 @@ public class CrownBlock extends HorizontalBlock {
         } else if (item == Items.NETHER_WART){
             return validateItemQuantity(itemStack,64,7,warTeam);
         } else if (item == Items.BROWN_MUSHROOM || item == Items.RED_MUSHROOM){
-            return validateItemQuantity(itemStack,24,5,warTeam);
+            return validateItemQuantity(itemStack,32,5,warTeam);
         }
         return -1;
     }
@@ -143,7 +143,7 @@ public class CrownBlock extends HorizontalBlock {
         if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK){
             return validateItemQuantity(itemStack,32,15,warTeam);
         } else if(item == Items.REDSTONE_BLOCK){
-            return validateItemQuantity(itemStack,64,8,warTeam);
+            return validateItemQuantity(itemStack,64,9,warTeam);
         }else if(item == Items.DIAMOND_BLOCK){
             return validateItemQuantity(itemStack,16,15,warTeam);
         } else if(item == Items.NETHERITE_BLOCK){
