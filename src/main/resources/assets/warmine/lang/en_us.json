@@ -1,4 +1,5 @@
 {
   "block.warmine.crown_block": "Crown Block",
-  "block.warmine.city_block": "City Block"
+  "block.warmine.city_block": "City Block",
+  "item.warmine.point": "Point"
 }
