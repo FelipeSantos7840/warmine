@@ -1,0 +1,9 @@
+{
+  "war_horn": {
+    "category": "blocks",
+    "subtitle": "warmine.war_horn",
+    "sounds": [
+      "warmine:war_horn"
+    ]
+  }
+}
