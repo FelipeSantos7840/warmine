@@ -1,26 +1,30 @@
 package com.felipesantos.warmine.util;
 
 import com.felipesantos.warmine.entities.WarTeam;
+import com.felipesantos.warmine.item.WarMineItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 public class SellItems {
     public static int sellItem(ItemStack itemStack, WarTeam warTeam){
-        int shrinkValue = SellItems.isAnimalItem(itemStack,warTeam);
+        Item item = itemStack.getItem();
+        int shrinkValue = SellItems.isAnimalItem(itemStack,warTeam,item);
         if(shrinkValue == -1){
-            shrinkValue = SellItems.isFarmItem(itemStack,warTeam);
+            shrinkValue = SellItems.isFarmItem(itemStack,warTeam,item);
             if(shrinkValue == -1){
-                shrinkValue = SellItems.isOreItem(itemStack,warTeam);
+                shrinkValue = SellItems.isOreItem(itemStack,warTeam,item);
                 if(shrinkValue == -1){
-                    shrinkValue = SellItems.isBossItem(itemStack,warTeam);
+                    shrinkValue = SellItems.isBossItem(itemStack,warTeam,item);
+                    if(shrinkValue == -1){
+                        shrinkValue = SellItems.isSpecialItem(itemStack,warTeam,item);
+                    }
                 }
             }
         }
         return shrinkValue;
     }
-    public static int isAnimalItem(ItemStack itemStack, WarTeam warTeam){
-        Item item = itemStack.getItem();
+    public static int isAnimalItem(ItemStack itemStack, WarTeam warTeam, Item item){
         if(item == Items.BEEF){
             return validateItemQuantity(itemStack,64,4,warTeam);
         } else if(item == Items.CHICKEN || item == Items.PORKCHOP){
@@ -33,8 +37,7 @@ public class SellItems {
         return -1;
     }
 
-    public static int isFarmItem(ItemStack itemStack,WarTeam warTeam){
-        Item item = itemStack.getItem();
+    public static int isFarmItem(ItemStack itemStack,WarTeam warTeam, Item item){
         if(item == Items.HAY_BLOCK){
             return validateItemQuantity(itemStack,32,7,warTeam);
         } else if (item == Items.CARROT || item == Items.POTATO || item == Items.BAMBOO || item == Items.CACTUS || item == Items.SUGAR_CANE || item == Items.BEETROOT){
@@ -49,8 +52,7 @@ public class SellItems {
         return -1;
     }
 
-    public static int isOreItem(ItemStack itemStack,WarTeam warTeam) {
-        Item item = itemStack.getItem();
+    public static int isOreItem(ItemStack itemStack,WarTeam warTeam, Item item) {
         if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK){
             return validateItemQuantity(itemStack,32,15,warTeam);
         } else if(item == Items.REDSTONE_BLOCK){
@@ -63,12 +65,18 @@ public class SellItems {
         return -1;
     }
 
-    public static int isBossItem(ItemStack itemStack,WarTeam warTeam){
-        Item item = itemStack.getItem();
+    public static int isBossItem(ItemStack itemStack,WarTeam warTeam, Item item){
         if (item == Items.DRAGON_EGG) {
             return validateItemQuantity(itemStack,1,50,warTeam);
         } else if(item == Items.NETHER_STAR){
             return validateItemQuantity(itemStack,1,35,warTeam);
+        }
+        return -1;
+    }
+
+    public static int isSpecialItem(ItemStack itemStack,WarTeam warTeam, Item item){
+        if (item == WarMineItems.POINT.get()) {
+            return validateItemQuantity(itemStack,1,1,warTeam);
         }
         return -1;
     }
