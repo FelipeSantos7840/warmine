@@ -84,7 +84,7 @@ public class CrownBlock extends HorizontalBlock {
                             player.inventory.deleteStack(itemStack);
                         }
                     }
-                    player.sendStatusMessage(new StringTextComponent("Team total points: " + warTeam.getScore()+"!"),true);
+                    player.sendStatusMessage(new StringTextComponent(crownBlock.getWarTeam().getName()+" has " + warTeam.getScore()+" points!"),true);
                 } else {
                     player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Capital of " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
                 }

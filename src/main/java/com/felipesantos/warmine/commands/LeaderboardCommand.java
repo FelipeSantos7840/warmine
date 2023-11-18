@@ -26,6 +26,7 @@ public class LeaderboardCommand {
                 strBuilder.append("[Team : \u00A7b"+ team.getName() + "\u00A7r - Score: \u00A7c" + team.getScore() + "\u00A7r],\n");
             }
             source.sendFeedback(new StringTextComponent(strBuilder.toString()),true);
+            return 1;
         }
         return -1;
     }
