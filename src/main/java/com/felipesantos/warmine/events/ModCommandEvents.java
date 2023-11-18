@@ -21,6 +21,7 @@ public class ModCommandEvents {
         new GetBlockInAreaCommand(event.getDispatcher());
         new TerritoryCommand(event.getDispatcher());
         new NameTerritoryCommand(event.getDispatcher());
+        new LeaderboardCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
