@@ -128,12 +128,14 @@ public class CrownBlock extends HorizontalBlock {
         Item item = itemStack.getItem();
         if(item == Items.HAY_BLOCK){
             return validateItemQuantity(itemStack,32,7,warTeam);
-        } else if (item == Items.CARROT || item == Items.POTATO || item == Items.BAMBOO || item == Items.CACTUS || item == Items.SUGAR_CANE){
+        } else if (item == Items.CARROT || item == Items.POTATO || item == Items.BAMBOO || item == Items.CACTUS || item == Items.SUGAR_CANE || item == Items.BEETROOT){
             return validateItemQuantity(itemStack,64,3,warTeam);
         } else if (item == Items.NETHER_WART){
             return validateItemQuantity(itemStack,64,7,warTeam);
         } else if (item == Items.BROWN_MUSHROOM || item == Items.RED_MUSHROOM){
             return validateItemQuantity(itemStack,32,5,warTeam);
+        } else if (item == Items.PUMPKIN){
+            return validateItemQuantity(itemStack,64,4,warTeam);
         }
         return -1;
     }
