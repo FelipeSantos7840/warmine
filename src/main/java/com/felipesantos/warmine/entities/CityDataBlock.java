@@ -1,7 +1,6 @@
 package com.felipesantos.warmine.entities;
 
 public class CityDataBlock extends AbstractCityBlock{
-    private String name;
 
     public CityDataBlock(Coordinate coordinate, WarTeam warTeam, String name) {
         defineRange(WarMineData.CITY_RANGE);

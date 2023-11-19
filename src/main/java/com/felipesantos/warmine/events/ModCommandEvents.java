@@ -23,6 +23,7 @@ public class ModCommandEvents {
         new NameTerritoryCommand(event.getDispatcher());
         new LeaderboardCommand(event.getDispatcher());
         new GetPointsCommand(event.getDispatcher());
+        new ToCityCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

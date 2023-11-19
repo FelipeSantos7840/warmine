@@ -131,6 +131,12 @@ public class VillagerTradeEvent {
             trades.get(villagerLevel).add(((trader, rand) -> new MerchantOffer(
                     new ItemStack(WarMineItems.POINT.get(),80),new ItemStack(WarMineBlocks.CITY_BLOCK.get(),1),20,15,0.15f
             )));
+
+            villagerLevel++;
+
+            trades.get(villagerLevel).add(((trader, rand) -> new MerchantOffer(
+                    new ItemStack(WarMineItems.POINT.get(),65),new ItemStack(WarMineItems.CITY_RUNE.get(),1),5,20,0.2f
+            )));
         }
     }
 }

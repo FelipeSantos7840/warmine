@@ -102,6 +102,16 @@ public class WarMineData {
         return getCapital(new Coordinate(pos.getX(), pos.getY(), pos.getZ()));
     }
 
+    public static CityDataBlock getCity(String cityName){
+        List<CityDataBlock> cityResult = MinecraftData.warmine.getCities().stream()
+                .filter((city) -> city.getName().equalsIgnoreCase(cityName)).collect(Collectors.toList());
+        if(cityResult.size() != 1){
+            return null;
+        } else {
+            return cityResult.get(0);
+        }
+    }
+
     public static CityDataBlock getCity(Coordinate coordinate){
         List<CityDataBlock> cityResult = MinecraftData.warmine.getCities().stream()
                 .filter((cities)->cities.getCoordinate().isSamePosition(coordinate)).collect(Collectors.toList());
