@@ -23,36 +23,40 @@ public class DeclareWarCommand {
     private int declareWar(CommandSource source,String teamToWar) throws CommandSyntaxException {
         PlayerEntity playerEntity = source.asPlayer();
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
-        if(player.getWarTeam() != null){
-            if(World.OVERWORLD == playerEntity.world.getDimensionKey()) {
-                AbstractCityBlock territoryDataBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
-                if (territoryDataBlock != null) {
-                    WarTeam teamWar = territoryDataBlock.getWarTeam();
-                    if (!teamWar.equals(player.getWarTeam())) {
-                        if (teamWar.getName().equalsIgnoreCase(teamToWar) && !(teamsAlreadyInWar(territoryDataBlock.getWarTeam(), player.getWarTeam().getName()))) {
-                            if (player.getWarTeam().getScore() >= 30) {
-                                player.getWarTeam().decrementScore(30);
-                                territoryDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
-                                player.getWarTeam().addTeamInWar(teamWar.getName());
-                                source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
-                                return 1;
+        if(WarMineData.DAY_OF_WAR) {
+            if (player.getWarTeam() != null) {
+                if (World.OVERWORLD == playerEntity.world.getDimensionKey()) {
+                    AbstractCityBlock territoryDataBlock = WarMineData.getTerritoryBlockInArea(playerEntity.getPosition());
+                    if (territoryDataBlock != null) {
+                        WarTeam teamWar = territoryDataBlock.getWarTeam();
+                        if (!teamWar.equals(player.getWarTeam())) {
+                            if (teamWar.getName().equalsIgnoreCase(teamToWar) && !(teamsAlreadyInWar(territoryDataBlock.getWarTeam(), player.getWarTeam().getName()))) {
+                                if (player.getWarTeam().getScore() >= 30) {
+                                    player.getWarTeam().decrementScore(30);
+                                    territoryDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
+                                    player.getWarTeam().addTeamInWar(teamWar.getName());
+                                    source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
+                                    return 1;
+                                } else {
+                                    source.sendFeedback(new StringTextComponent("Declare war cost 30 points!!"), true);
+                                }
                             } else {
-                                source.sendFeedback(new StringTextComponent("Declare war cost 30 points!!"), true);
+                                source.sendFeedback(new StringTextComponent("Teams already in war or territory is not the same of solicited!"), true);
                             }
                         } else {
-                            source.sendFeedback(new StringTextComponent("Teams already in war or territory is not the same of solicited!"), true);
+                            source.sendFeedback(new StringTextComponent("You can't declare war to your own team!"), true);
                         }
                     } else {
-                        source.sendFeedback(new StringTextComponent("You can't declare war to your own team!"), true);
+                        source.sendFeedback(new StringTextComponent("Not in enemy territory!"), true);
                     }
                 } else {
-                    source.sendFeedback(new StringTextComponent("Not in enemy territory!"), true);
+                    source.sendFeedback(new StringTextComponent("You need to be in the Overworld to declare war!"), true);
                 }
             } else {
-                source.sendFeedback(new StringTextComponent("You need to be in the Overworld to declare war!"),true);
+                source.sendFeedback(new StringTextComponent("You need a team to declare war!"), true);
             }
         } else {
-            source.sendFeedback(new StringTextComponent("You need a team to declare war!"),true);
+            source.sendFeedback(new StringTextComponent("It has to be a war day to declare war!"), true);
         }
         return -1;
     }

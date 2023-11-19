@@ -11,6 +11,7 @@ public class WarMineData {
     public static final int INITIAL_SCORE = 0;
     public static final int CROWN_RANGE = 64;
     public static final int CITY_RANGE = 32;
+    public static boolean DAY_OF_WAR = false;
     private List<WarTeam> warTeams;
     private List<Player> players;
     private List<CrownDataBlock> capitals;

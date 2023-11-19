@@ -24,6 +24,8 @@ public class ModCommandEvents {
         new LeaderboardCommand(event.getDispatcher());
         new GetPointsCommand(event.getDispatcher());
         new ToCityCommand(event.getDispatcher());
+        new DayOfWarCommand(event.getDispatcher());
+        new RemoveAllWarsCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
