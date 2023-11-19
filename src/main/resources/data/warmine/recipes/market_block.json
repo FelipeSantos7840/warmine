@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L#L",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "warmine:point"
+    },
+    "X": {
+      "item": "minecraft:cobblestone"
+    },
+    "L": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "result": {
+    "item": "warmine:market_block"
+  }
+}

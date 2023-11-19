@@ -32,7 +32,7 @@ public class Horn extends Item {
 
             addEffectsToTeam(worldIn,playerIn);
 
-            worldIn.playSound(null,playerIn.getPosition(), WarSoundEvents.WAR_HORN.get(), SoundCategory.BLOCKS,0.6f,1);
+            worldIn.playSound(null,playerIn.getPosition(), WarSoundEvents.WAR_HORN.get(), SoundCategory.BLOCKS,0.3f,1);
             itemStack.damageItem(1,playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
