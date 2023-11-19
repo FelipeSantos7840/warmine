@@ -31,8 +31,7 @@ public class WarMineBlocks {
             .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(20)));
 
     public static final RegistryObject<Block> MARKET_BLOCK = registerBlock("market_block",()-> new MarketBlock(AbstractBlock.Properties.from(Blocks.STONE)
-            .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(10)) {
-    });
+            .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(10)));
 
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block){

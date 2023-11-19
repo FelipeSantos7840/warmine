@@ -54,6 +54,10 @@ public class WarMine
 
     private void setup(final FMLCommonSetupEvent event)
     {
+        event.enqueueWork(() ->{
+            WarMineVillagers.registerPOIs();
+        });
+
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());

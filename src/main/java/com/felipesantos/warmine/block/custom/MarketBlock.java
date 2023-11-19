@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 
 public class MarketBlock extends HorizontalBlock {
 
-    protected MarketBlock(Properties builder) {
+    public MarketBlock(Properties builder) {
         super(builder);
     }
 
