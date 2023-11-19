@@ -30,7 +30,7 @@ public class MarketBlock extends HorizontalBlock {
         if(!worldIn.isRemote()){
             Player warPlayer = WarMineData.getPlayer(player.getName().getString());
             WarTeam warTeam = warPlayer.getWarTeam();
-            if(warTeam != null) {
+            if(warTeam != null && WarMineData.getCapital(warTeam) != null) {
                 int shrinkValue;
                 for (ItemStack itemStack : player.inventory.mainInventory) {
                     shrinkValue = SellItems.sellItem(itemStack,warTeam);
@@ -43,7 +43,7 @@ public class MarketBlock extends HorizontalBlock {
                 }
                 FileManipuler.warmineSaveData(MinecraftData.warmine);
             } else {
-                player.sendStatusMessage(new StringTextComponent("You don't have a team!"),true);
+                player.sendStatusMessage(new StringTextComponent("You don't have a team or a Crown Block!"),true);
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
