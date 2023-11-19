@@ -7,6 +7,7 @@ import com.felipesantos.warmine.item.WarMineItems;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -27,6 +28,11 @@ public class WarMineBlocks {
 
     public static final RegistryObject<Block> CITY_BLOCK = registerBlock("city_block", ()-> new CityBlock(AbstractBlock.Properties.from(Blocks.OBSIDIAN)
             .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(20)));
+
+    public static final RegistryObject<Block> MARKET_BLOCK = registerBlock("market_block",()-> new HorizontalBlock(AbstractBlock.Properties.from(Blocks.STONE)
+            .setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(10)) {
+    });
+
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name,block);

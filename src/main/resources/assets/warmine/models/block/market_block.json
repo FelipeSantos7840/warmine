@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "north": "warmine:block/market_block_side",
+    "east": "warmine:block/market_block_side",
+    "south": "warmine:block/market_block_side",
+    "west": "warmine:block/market_block_side",
+    "up": "warmine:block/market_block_top",
+    "down": "minecraft:block/cobblestone",
+    "particle": "minecraft:block/cobblestone"
+  }
+}

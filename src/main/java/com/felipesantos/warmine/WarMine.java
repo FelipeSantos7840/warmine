@@ -3,6 +3,7 @@ package com.felipesantos.warmine;
 import com.felipesantos.warmine.block.WarMineBlocks;
 import com.felipesantos.warmine.events.WarSoundEvents;
 import com.felipesantos.warmine.item.WarMineItems;
+import com.felipesantos.warmine.villager.WarMineVillagers;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,6 +40,7 @@ public class WarMine
         WarMineItems.registerBus(eventBus);
         WarMineBlocks.registerBus(eventBus);
         WarSoundEvents.register(eventBus);
+        WarMineVillagers.register(eventBus);
 
 
         eventBus.addListener(this::setup);

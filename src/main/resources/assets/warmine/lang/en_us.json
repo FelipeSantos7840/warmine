@@ -1,6 +1,7 @@
 {
   "block.warmine.crown_block": "Crown Block",
   "block.warmine.city_block": "City Block",
+  "block.warmine.market_block": "Market Block",
   "item.warmine.point": "\u00A76Point\u00A7r",
   "item.warmine.horn": "War Horn"
 }
