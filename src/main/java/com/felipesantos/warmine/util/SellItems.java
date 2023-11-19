@@ -27,7 +27,7 @@ public class SellItems {
     public static int isAnimalItem(ItemStack itemStack, WarTeam warTeam, Item item){
         if(item == Items.BEEF){
             return validateItemQuantity(itemStack,64,4,warTeam);
-        } else if(item == Items.CHICKEN || item == Items.PORKCHOP){
+        } else if(item == Items.CHICKEN || item == Items.PORKCHOP || item == Items.MUTTON){
             return validateItemQuantity(itemStack,64,5,warTeam);
         } else if(item == Items.LEATHER){
             return validateItemQuantity(itemStack,64,3,warTeam);
@@ -53,7 +53,7 @@ public class SellItems {
     }
 
     public static int isOreItem(ItemStack itemStack,WarTeam warTeam, Item item) {
-        if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK){
+        if(item == Items.IRON_BLOCK || item == Items.GOLD_BLOCK || item == Items.EMERALD_BLOCK){
             return validateItemQuantity(itemStack,32,15,warTeam);
         } else if(item == Items.REDSTONE_BLOCK){
             return validateItemQuantity(itemStack,64,9,warTeam);
