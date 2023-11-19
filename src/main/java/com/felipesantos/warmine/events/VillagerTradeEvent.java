@@ -48,7 +48,7 @@ public class VillagerTradeEvent {
             )));
 
             trades.get(villagerLevel).add(((trader, rand) -> new MerchantOffer(
-                    new ItemStack(WarMineItems.POINT.get(),10),new ItemStack(Items.BEETROOT,16),12,7,0.02f
+                    new ItemStack(WarMineItems.POINT.get(),7),new ItemStack(Items.SUGAR_CANE,10),12,5,0.03f
             )));
 
             villagerLevel++;
