@@ -5,6 +5,7 @@ import com.felipesantos.warmine.block.custom.CityBlock;
 import com.felipesantos.warmine.block.custom.CrownBlock;
 import com.felipesantos.warmine.entities.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,10 +23,12 @@ public class CityBreakEvent {
                 if(player.getWarTeam() == null){
                     event.setCanceled(true);
                 } else if(player.getWarTeam().equals(cityBlock.getWarTeam())){
+                    CrownBreakEvent.deleteNameOfBlock((ServerWorld) playerEntity.getEntityWorld(),cityBlock);
                     MinecraftData.warmine.getCities().remove(cityBlock);
                 } else {
                     boolean validate = player.getWarTeam().getTeamsInWar().contains(cityBlock.getWarTeam().getName());
                     if(validate){
+                        CrownBreakEvent.deleteNameOfBlock((ServerWorld) playerEntity.getEntityWorld(),cityBlock);
                         MinecraftData.warmine.getCities().remove(cityBlock);
                     } else {
                         event.setCanceled(true);

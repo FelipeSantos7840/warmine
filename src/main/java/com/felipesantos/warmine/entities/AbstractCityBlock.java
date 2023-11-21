@@ -2,11 +2,14 @@ package com.felipesantos.warmine.entities;
 
 import net.minecraft.util.math.BlockPos;
 
+import java.util.UUID;
+
 public abstract class AbstractCityBlock {
     private int RANGE_AREA;
     protected Coordinate coordinate;
     protected WarTeam warTeam;
     protected String name;
+    protected UUID nameUUID;
 
     protected void defineRange(int range){
         RANGE_AREA = range;
@@ -14,6 +17,14 @@ public abstract class AbstractCityBlock {
 
     public int getRANGE_AREA(){
         return this.RANGE_AREA;
+    }
+
+    public UUID getNameUUID() {
+        return nameUUID;
+    }
+
+    public void setNameUUID(UUID nameUUID) {
+        this.nameUUID = nameUUID;
     }
 
     public Coordinate getCoordinate() {

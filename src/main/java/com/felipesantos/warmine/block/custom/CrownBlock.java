@@ -7,7 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.PushReaction;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 
 public class CrownBlock extends HorizontalBlock {
@@ -37,8 +40,10 @@ public class CrownBlock extends HorizontalBlock {
                     if (player != null && player.getWarTeam() != null) {
                         if (!(WarMineData.teamAlreadyHaveACapital(player.getWarTeam()))) {
                             if (!(WarMineData.isAboutArea(pos, WarMineData.CROWN_RANGE))) {
+                                UUID nameInBlockUUID = createNameInBlock("No Defined Name",worldIn,pos);
+                                System.out.println("LOG |" + (nameInBlockUUID != null? nameInBlockUUID.toString():"Don't have a UUID"));
                                 MinecraftData.warmine.getCapitals()
-                                        .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
+                                        .add(new CrownDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam(),nameInBlockUUID));
                                 isNotValide = false;
                             }
                         }
@@ -78,6 +83,25 @@ public class CrownBlock extends HorizontalBlock {
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    public static UUID createNameInBlock(String nameToBlock, World worldIn, Coordinate coordinate){
+        ArmorStandEntity armorStand = EntityType.ARMOR_STAND.create(worldIn);
+        if (armorStand != null) {
+            armorStand.setInvisible(true);
+            armorStand.setInvulnerable(true);
+            armorStand.setNoGravity(true);
+            armorStand.setPosition(coordinate.getX() + 0.5, coordinate.getY() - 1.0, coordinate.getZ() + 0.5);
+            armorStand.setCustomName(new StringTextComponent(nameToBlock));
+            armorStand.setCustomNameVisible(true);
+            worldIn.addEntity(armorStand);
+            return armorStand.getUniqueID();
+        }
+        return null;
+    }
+
+    public static UUID createNameInBlock(String nameToBlock, World worldIn, BlockPos pos){
+        return createNameInBlock(nameToBlock,worldIn,new Coordinate(pos.getX(),pos.getY(),pos.getZ()));
     }
 
     @Override

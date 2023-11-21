@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeBlock;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class CityBlock extends HorizontalBlock implements IForgeBlock {
 
@@ -40,8 +41,9 @@ public class CityBlock extends HorizontalBlock implements IForgeBlock {
                     if (player != null && player.getWarTeam() != null) {
                         if (!(WarMineData.isAboutArea(pos, WarMineData.CITY_RANGE))) {
                             if (player.getWarTeam().getScore() >= 40) {
+                                UUID nameInBlockUUID = CrownBlock.createNameInBlock("No Defined Name",worldIn,pos);
                                 MinecraftData.warmine.getCities()
-                                        .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam()));
+                                        .add(new CityDataBlock(new Coordinate(pos.getX(), pos.getY(), pos.getZ()), player.getWarTeam(),nameInBlockUUID));
                                 player.getWarTeam().decrementScore(40);
                                 isNotValide = false;
                             } else {
