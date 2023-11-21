@@ -33,7 +33,9 @@ public class NameTerritoryCommand {
         if(territoryBlock != null){
             if(territoryBlock.getWarTeam().equals(playerWarTeam)){
                 territoryBlock.setName(name);
-                setCustomName(source.getWorld(),territoryBlock.getNameUUID(),name);
+                if(territoryBlock.getNameUUID() != null) {
+                    setCustomName(source.getWorld(), territoryBlock.getNameUUID(), name);
+                }
                 source.sendFeedback(new StringTextComponent("Defined Territory Name!"),true);
                 return 1;
             } else {
