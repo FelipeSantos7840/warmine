@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 public class MinecraftTeamsManipulator {
     public static ScorePlayerTeam createNewMinecraftTeam(String teamName){
         ScorePlayerTeam newTeam = MinecraftData.score.createTeam(teamName);
+        newTeam.setNameTagVisibility(Team.Visible.HIDE_FOR_OTHER_TEAMS);//ESCONDER NAMETAG PARA TIME ADVERSÁRIO
+        newTeam.setAllowFriendlyFire(false); //RETIRAR CASO NÃO FUNCIONAR
         return newTeam;
     }
 
