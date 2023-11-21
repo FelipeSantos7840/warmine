@@ -106,7 +106,12 @@ public class WarMineData {
 
     public static CityDataBlock getCity(String cityName){
         List<CityDataBlock> cityResult = MinecraftData.warmine.getCities().stream()
-                .filter((city) -> city.getName().equalsIgnoreCase(cityName)).collect(Collectors.toList());
+                .filter((city) -> {
+                    if(city.getName() != null){
+                        return city.getName().equalsIgnoreCase(cityName);
+                    }
+                    return false;
+                }).collect(Collectors.toList());
         if(cityResult.size() != 1){
             return null;
         } else {
