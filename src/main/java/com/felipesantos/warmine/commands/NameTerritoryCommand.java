@@ -9,8 +9,12 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.server.ServerWorld;
+
+import java.util.UUID;
 
 public class NameTerritoryCommand {
     public NameTerritoryCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -29,6 +33,7 @@ public class NameTerritoryCommand {
         if(territoryBlock != null){
             if(territoryBlock.getWarTeam().equals(playerWarTeam)){
                 territoryBlock.setName(name);
+                setCustomName(source.getWorld(),territoryBlock.getNameUUID(),name);
                 source.sendFeedback(new StringTextComponent("Defined Territory Name!"),true);
                 return 1;
             } else {
@@ -36,5 +41,14 @@ public class NameTerritoryCommand {
             }
         }
         return -1;
+    }
+
+    public void setCustomName(ServerWorld serverWorld, UUID entityUUID, String name){
+        if(entityUUID != null && !serverWorld.isRemote()){
+            Entity entityBlock = serverWorld.getEntityByUuid(entityUUID);
+            if(entityBlock != null){
+                entityBlock.setCustomName(new StringTextComponent(name));
+            }
+        }
     }
 }
