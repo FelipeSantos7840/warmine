@@ -1,5 +1,6 @@
 package com.felipesantos.warmine.entities;
 
+import com.felipesantos.warmine.events.CrownBreakEvent;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
@@ -260,6 +261,7 @@ public class WarMineData {
             for(CrownDataBlock crownBlock : capitals){
                 if(crownBlock.getWarTeam() != null){
                     if(crownBlock.getWarTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                        CrownBreakEvent.deleteNameOfBlock(MinecraftData.world.getServer().func_241755_D_(),crownBlock);
                         MinecraftData.world.destroyBlock(crownBlock.getCoordinate().toBlockPos(), false);
                         crownForDelete = crownBlock;
                     }
@@ -275,6 +277,7 @@ public class WarMineData {
             for(CityDataBlock cityBlock : cities){
                 if(cityBlock.getWarTeam() != null){
                     if(cityBlock.getWarTeam().getName().equalsIgnoreCase(warTeam.getName())){
+                        CrownBreakEvent.deleteNameOfBlock(MinecraftData.world.getServer().func_241755_D_(),cityBlock);
                         MinecraftData.world.destroyBlock(cityBlock.getCoordinate().toBlockPos(), false);
                         cityForRemove = cityBlock;
                     }
