@@ -102,13 +102,14 @@ public class JsonManipulator {
     private static CityDataBlock cityBlockCollect(JsonNode blockJson){
         String teamBlock = blockJson.get("team_name").asText();
         String nameCity = blockJson.get("city_name").asText();
+        UUID textUUID = JsonManipulator.getUUIDofField(blockJson);
         int x = blockJson.get("x").asInt();
         int y = blockJson.get("y").asInt();
         int z = blockJson.get("z").asInt();
         if(MinecraftData.warmine.getTeams().isEmpty()){
-            return new CityDataBlock(new Coordinate(x,y,z),nameCity);
+            return new CityDataBlock(new Coordinate(x,y,z),nameCity,textUUID);
         } else {
-            return new CityDataBlock(new Coordinate(x,y,z),WarMineData.getWarTeam(teamBlock),nameCity);
+            return new CityDataBlock(new Coordinate(x,y,z),nameCity,WarMineData.getWarTeam(teamBlock),textUUID);
         }
     }
 
@@ -134,13 +135,14 @@ public class JsonManipulator {
     private static CrownDataBlock crownBlockCollect(JsonNode blockJson){
         String teamBlock = blockJson.get("team_name").asText();
         String nameCapital = blockJson.get("capital_name").asText();
+        UUID textUUID = JsonManipulator.getUUIDofField(blockJson);
         int x = blockJson.get("x").asInt();
         int y = blockJson.get("y").asInt();
         int z = blockJson.get("z").asInt();
         if(MinecraftData.warmine.getTeams().isEmpty()){
-            return new CrownDataBlock(new Coordinate(x,y,z),nameCapital);
+            return new CrownDataBlock(new Coordinate(x,y,z),nameCapital,textUUID);
         } else {
-            return new CrownDataBlock(new Coordinate(x,y,z),WarMineData.getWarTeam(teamBlock),nameCapital);
+            return new CrownDataBlock(new Coordinate(x,y,z),nameCapital,WarMineData.getWarTeam(teamBlock),textUUID);
         }
     }
 
@@ -193,6 +195,7 @@ public class JsonManipulator {
             auxiliarNode = mapperJson.createObjectNode();
             auxiliarNode.put("team_name",crownBlock.getWarTeam()!=null?crownBlock.getWarTeam().getName():"NullTeam");
             auxiliarNode.put("capital_name",crownBlock.getName());
+            auxiliarNode.put("uuid_entity",crownBlock.getNameUUID()!=null?crownBlock.getNameUUID().toString():"NoText");
             auxiliarNode.put("x",crownBlock.getCoordinate().getX());
             auxiliarNode.put("y",crownBlock.getCoordinate().getY());
             auxiliarNode.put("z",crownBlock.getCoordinate().getZ());
@@ -213,6 +216,7 @@ public class JsonManipulator {
             auxiliarNode = mapperJson.createObjectNode();
             auxiliarNode.put("team_name",cityBlock.getWarTeam()!=null?cityBlock.getWarTeam().getName():"NullTeam");
             auxiliarNode.put("city_name",cityBlock.getName());
+            auxiliarNode.put("uuid_entity",cityBlock.getNameUUID()!=null?cityBlock.getNameUUID().toString():"NoText");
             auxiliarNode.put("x",cityBlock.getCoordinate().getX());
             auxiliarNode.put("y",cityBlock.getCoordinate().getY());
             auxiliarNode.put("z",cityBlock.getCoordinate().getZ());
@@ -230,5 +234,19 @@ public class JsonManipulator {
             System.out.println("Error Log: "+e.getLocalizedMessage());
             e.printStackTrace();
         }
+    }
+
+    private static UUID getUUIDofField(JsonNode blockJson){
+        String keyUUID = "NoText";
+        if(blockJson.has("uuid_entity")) {
+            keyUUID = blockJson.get("uuid_entity").asText();
+        }
+        UUID textUUID;
+        if(!keyUUID.equalsIgnoreCase("NoText")){
+            textUUID = UUID.fromString(keyUUID);
+        } else {
+            textUUID = null;
+        }
+        return textUUID;
     }
 }

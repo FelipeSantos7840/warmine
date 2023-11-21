@@ -4,6 +4,14 @@ import java.util.UUID;
 
 public class CityDataBlock extends AbstractCityBlock{
 
+    public CityDataBlock(Coordinate coordinate,String name,WarTeam warTeam,UUID nameUUID) {
+        defineRange(WarMineData.CITY_RANGE);
+        this.coordinate = coordinate;
+        this.warTeam = warTeam;
+        this.name =name;
+        this.nameUUID = nameUUID;
+    }
+
     public CityDataBlock(Coordinate coordinate, WarTeam warTeam, UUID nameUUID){
         defineRange(WarMineData.CROWN_RANGE);
         this.coordinate = coordinate;
@@ -11,17 +19,12 @@ public class CityDataBlock extends AbstractCityBlock{
         this.nameUUID = nameUUID;
     }
 
-    public CityDataBlock(Coordinate coordinate, WarTeam warTeam, String name) {
+    public CityDataBlock(Coordinate coordinate,String name,UUID nameUUID) {
         defineRange(WarMineData.CITY_RANGE);
         this.coordinate = coordinate;
         this.warTeam = warTeam;
-        this.name = name;
-    }
-
-    public CityDataBlock(Coordinate coordinate, WarTeam warTeam) {
-        defineRange(WarMineData.CITY_RANGE);
-        this.coordinate = coordinate;
-        this.warTeam = warTeam;
+        this.name =name;
+        this.nameUUID = nameUUID;
     }
 
     public CityDataBlock(Coordinate coordinate, String name) {
