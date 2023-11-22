@@ -28,7 +28,7 @@ public class MyCitiesCommand {
             if(!cities.isEmpty()){
                 StringBuilder strBuilder = new StringBuilder("--CITIES--\n");
                 for(CityDataBlock city : cities){
-                    strBuilder.append("City Name:"+city.getName()+" | City Coordinate: "+city.getCoordinate()+"\n");
+                    strBuilder.append("City Name:\u00A7c"+city.getName()+"\u00A7r | City Coordinate: "+city.getCoordinate()+"\n");
                 }
                 source.sendFeedback(new StringTextComponent(strBuilder.toString()),true);
                 return 1;
