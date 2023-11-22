@@ -62,8 +62,10 @@ public class CityBlock extends HorizontalBlock implements IForgeBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCity(pos).getName()+"! Team: " + WarMineData.getCity(pos).getWarTeam().getName()),true);
-        FileManipuler.warmineSaveData(MinecraftData.warmine);
+        if(!worldIn.isRemote()) {
+            player.sendStatusMessage(new StringTextComponent("City of " + WarMineData.getCity(pos).getName() + "! Team: " + WarMineData.getCity(pos).getWarTeam().getName()), true);
+            FileManipuler.warmineSaveData(MinecraftData.warmine);
+        }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 

@@ -27,6 +27,7 @@ public class ModCommandEvents {
         new DayOfWarCommand(event.getDispatcher());
         new RemoveAllWarsCommand(event.getDispatcher());
         new TeamMembersCommand(event.getDispatcher());
+        new MyCitiesCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }
