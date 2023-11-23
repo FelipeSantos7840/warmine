@@ -23,36 +23,35 @@ public class TerritoryAreaExplosion {
     @SubscribeEvent
     public static void onTerritoryAreaExplosion(ExplosionEvent.Detonate event){
         Explosion explosion = event.getExplosion();
-        if(isExplosionValidMob(explosion)){
+        if(isExplosionValidMob(explosion)) {
             List<Entity> affectedPlayers = event.getAffectedEntities();
             boolean territoryColide = false;
             boolean haveACapitalPlayer = false;
             AbstractCityBlock territoryBlock = null;
-            for(BlockPos pos : event.getAffectedBlocks()){
+            for (BlockPos pos : event.getAffectedBlocks()) {
                 territoryBlock = WarMineData.getTerritoryBlockInArea(pos);
-                if(territoryBlock != null){
+                if (territoryBlock != null) {
                     territoryColide = true;
                     break;
                 }
             }
-            if(territoryColide) {
+            if (territoryColide) {
                 Player warPlayer;
                 for (Entity entity : affectedPlayers) {
                     if (entity instanceof PlayerEntity) {
                         warPlayer = WarMineData.getPlayer(entity.getName().getString());
-                        if(warPlayer.getWarTeam() != null) {
-                            if(warPlayer.getWarTeam().equals(territoryBlock.getWarTeam()) || inWarWithTeam(territoryBlock,warPlayer.getWarTeam().getName())){
+                        if (warPlayer.getWarTeam() != null) {
+                            if (warPlayer.getWarTeam().equals(territoryBlock.getWarTeam()) || inWarWithTeam(territoryBlock, warPlayer.getWarTeam().getName())) {
                                 haveACapitalPlayer = true;
                             }
                         }
                     }
                 }
             }
-            if(territoryColide && !haveACapitalPlayer){
+            if (territoryColide && !haveACapitalPlayer) {
                 event.getAffectedBlocks().clear();
             }
         }
-        System.out.println("LOG |" + explosion.getExploder());
     }
 
     private static boolean inWarWithTeam(AbstractCityBlock territoryBlock,String teamName){

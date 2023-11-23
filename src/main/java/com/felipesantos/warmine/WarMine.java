@@ -4,6 +4,7 @@ import com.felipesantos.warmine.block.WarMineBlocks;
 import com.felipesantos.warmine.events.WarSoundEvents;
 import com.felipesantos.warmine.item.WarMineItems;
 import com.felipesantos.warmine.villager.WarMineVillagers;
+import com.felipesantos.warmine.world.structure.WarMineStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,6 +42,7 @@ public class WarMine
         WarMineBlocks.registerBus(eventBus);
         WarSoundEvents.register(eventBus);
         WarMineVillagers.register(eventBus);
+        WarMineStructures.register(eventBus);
 
 
         eventBus.addListener(this::setup);
@@ -56,6 +58,7 @@ public class WarMine
     {
         event.enqueueWork(() ->{
             WarMineVillagers.registerPOIs();
+            WarMineStructures.setupStructures();
         });
 
         // some preinit code
