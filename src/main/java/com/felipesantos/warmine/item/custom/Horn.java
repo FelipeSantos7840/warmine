@@ -27,23 +27,23 @@ public class Horn extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if(!worldIn.isRemote()){
+        if(!worldIn.isRemote()) {
             ItemStack itemStack = playerIn.getHeldItem(handIn);
 
-            addEffectsToTeam(worldIn,playerIn);
+            addEffectsToTeam(worldIn, playerIn);
 
-            worldIn.playSound(null,playerIn.getPosition(), WarSoundEvents.WAR_HORN.get(), SoundCategory.BLOCKS,0.3f,1);
-            itemStack.damageItem(1,playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
+            worldIn.playSound(null, playerIn.getPosition(), WarSoundEvents.WAR_HORN.get(), SoundCategory.BLOCKS, 0.3f, 1);
+            itemStack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     private void addEffectsToTeam(World world, PlayerEntity playerEntity){
         Player player = WarMineData.getPlayer(playerEntity.getName().getString());
-        if(player.getWarTeam() != null){
+        if (player.getWarTeam() != null) {
             WarTeam warTeam = player.getWarTeam();
             List<Player> playersOfTeam = MinecraftData.warmine.getPlayers()
-                    .stream().filter((warPlayer) -> warPlayer.getWarTeam().equals(warTeam)).collect(Collectors.toList());
+                    .stream().filter((warPlayer) -> warTeam.equals(warPlayer.getWarTeam())).collect(Collectors.toList());
             for (Player p : playersOfTeam) {
                 for (PlayerEntity pEntity : world.getPlayers()) {
                     if (p.getName().equalsIgnoreCase(pEntity.getName().getString())) {
