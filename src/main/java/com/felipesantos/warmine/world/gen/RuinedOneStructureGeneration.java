@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class WarmineStructureGeneration {
+public class RuinedOneStructureGeneration {
     public static void generateStructures(final BiomeLoadingEvent event){
         RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
@@ -23,6 +23,5 @@ public class WarmineStructureGeneration {
 
             structures.add(() -> WarMineStructures.RUINED_ONE.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
         }
-
     }
 }

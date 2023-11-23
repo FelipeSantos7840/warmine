@@ -1,7 +1,6 @@
 package com.felipesantos.warmine.world.structure.structures;
 
 import com.felipesantos.warmine.WarMine;
-import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
@@ -26,15 +25,12 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
-public class RuinedOneStructure extends Structure<NoFeatureConfig> {
-    /*IMPORTANTE REFERENCIA PARA GERAÇÃO DE ESTRUTURAS NA 1.16.5*/
+public class RuinedTwoStructure extends Structure<NoFeatureConfig> {
 
-    /*BASE NA GERAÇÃO DE ESTRUTURAS*/
-    public RuinedOneStructure() {
+    public RuinedTwoStructure() {
         super(NoFeatureConfig.CODEC);
     }
 
-    /*INDICA O TIPO DE ESTRUTURA, NESSE CASO STRUTURA NA SUPERFICE*/
     @Override
     public GenerationStage.Decoration getDecorationStage() {
         return GenerationStage.Decoration.SURFACE_STRUCTURES;
@@ -57,10 +53,10 @@ public class RuinedOneStructure extends Structure<NoFeatureConfig> {
 
     @Override
     public IStartFactory<NoFeatureConfig> getStartFactory() {
-        return RuinedOneStructure.Start::new;
+        return RuinedTwoStructure.Start::new;
     }
 
-    public static class Start extends StructureStart<NoFeatureConfig>{
+    public static class Start extends StructureStart<NoFeatureConfig> {
 
         public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ,
                      MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
@@ -82,12 +78,12 @@ public class RuinedOneStructure extends Structure<NoFeatureConfig> {
             //addpieces()
             JigsawManager.func_242837_a(dynamicRegistryManager,
                     new VillageConfig(() -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
-                            .getOrDefault(new ResourceLocation(WarMine.MOD_ID, "ruined1/start_pool")),
+                            .getOrDefault(new ResourceLocation(WarMine.MOD_ID, "ruined2/start_pool")),
                             10), AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
                     blockpos, this.components, this.rand,false,true);
 
-            //ORGANIZA O BLOCO DE CRIAÇÃO DA ESTRUTURA <TESTAR>
-            this.components.forEach(piece -> piece.offset(0, 0, 0));
+
+            this.components.forEach(piece -> piece.offset(0, 1, 0));
             this.components.forEach(piece -> piece.getBoundingBox().minY -= 1);
 
             this.recalculateStructureSize();
@@ -98,4 +94,5 @@ public class RuinedOneStructure extends Structure<NoFeatureConfig> {
                     this.components.get(0).getBoundingBox().minZ);
         }
     }
+
 }

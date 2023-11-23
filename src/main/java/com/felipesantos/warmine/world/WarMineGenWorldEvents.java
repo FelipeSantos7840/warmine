@@ -1,7 +1,8 @@
 package com.felipesantos.warmine.world;
 
 import com.felipesantos.warmine.WarMine;
-import com.felipesantos.warmine.world.gen.WarmineStructureGeneration;
+import com.felipesantos.warmine.world.gen.RuinedOneStructureGeneration;
+import com.felipesantos.warmine.world.gen.RuinedTwoStructureGeneration;
 import com.felipesantos.warmine.world.structure.WarMineStructures;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.ResourceLocation;
@@ -29,7 +30,8 @@ public class WarMineGenWorldEvents {
 
     @SubscribeEvent
     public static void biomeLoadingEvent(final BiomeLoadingEvent event){
-        WarmineStructureGeneration.generateStructures(event);
+        RuinedOneStructureGeneration.generateStructures(event);
+        RuinedTwoStructureGeneration.generateStructures(event);
     }
 
     @SubscribeEvent
@@ -59,8 +61,14 @@ public class WarMineGenWorldEvents {
 
             Map<Structure<?>, StructureSeparationSettings> tempMap =
                     new HashMap<>(serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
+
+            //ADD STRUCTURE
             tempMap.putIfAbsent(WarMineStructures.RUINED_ONE.get(),
                     DimensionStructuresSettings.field_236191_b_.get(WarMineStructures.RUINED_ONE.get()));
+
+            tempMap.putIfAbsent(WarMineStructures.RUINED_TWO.get(),
+                    DimensionStructuresSettings.field_236191_b_.get(WarMineStructures.RUINED_TWO.get()));
+
             serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
         }
     }

@@ -2,6 +2,7 @@ package com.felipesantos.warmine.world.structure;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.world.structure.structures.RuinedOneStructure;
+import com.felipesantos.warmine.world.structure.structures.RuinedTwoStructure;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -22,7 +23,10 @@ public class WarMineStructures {
             DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, WarMine.MOD_ID);
 
     public static final RegistryObject<Structure<NoFeatureConfig>> RUINED_ONE =
-            STRUCTURES.register("ruine1", RuinedOneStructure::new);
+            STRUCTURES.register("ruined1", RuinedOneStructure::new);
+
+    public static final RegistryObject<Structure<NoFeatureConfig>> RUINED_TWO =
+            STRUCTURES.register("ruined2", RuinedTwoStructure::new);
 
     /* average distance apart in chunks between spawn attempts */
     /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/
@@ -30,7 +34,11 @@ public class WarMineStructures {
     Make this large and unique. */
     public static void setupStructures() {
         setupMapSpacingAndLand(RUINED_ONE.get(),
-                new StructureSeparationSettings(100,50, 13245876),
+                new StructureSeparationSettings(50,30, 13245876),
+                true);
+
+        setupMapSpacingAndLand(RUINED_TWO.get(),
+                new StructureSeparationSettings(70,30,13245877),
                 true);
     }
 
