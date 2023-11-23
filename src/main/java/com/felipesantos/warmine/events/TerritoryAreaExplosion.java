@@ -2,22 +2,18 @@ package com.felipesantos.warmine.events;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.AbstractCityBlock;
-import com.felipesantos.warmine.entities.MinecraftData;
 import com.felipesantos.warmine.entities.Player;
 import com.felipesantos.warmine.entities.WarMineData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = WarMine.MOD_ID)
 public class TerritoryAreaExplosion {
