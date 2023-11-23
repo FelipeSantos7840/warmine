@@ -2,6 +2,7 @@ package com.felipesantos.warmine.world;
 
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.world.gen.RuinedOneStructureGeneration;
+import com.felipesantos.warmine.world.gen.RuinedThreeStructureGeneration;
 import com.felipesantos.warmine.world.gen.RuinedTwoStructureGeneration;
 import com.felipesantos.warmine.world.structure.WarMineStructures;
 import com.mojang.serialization.Codec;
@@ -32,6 +33,7 @@ public class WarMineGenWorldEvents {
     public static void biomeLoadingEvent(final BiomeLoadingEvent event){
         RuinedOneStructureGeneration.generateStructures(event);
         RuinedTwoStructureGeneration.generateStructures(event);
+        RuinedThreeStructureGeneration.generateStructures(event);
     }
 
     @SubscribeEvent
@@ -68,6 +70,9 @@ public class WarMineGenWorldEvents {
 
             tempMap.putIfAbsent(WarMineStructures.RUINED_TWO.get(),
                     DimensionStructuresSettings.field_236191_b_.get(WarMineStructures.RUINED_TWO.get()));
+
+            tempMap.putIfAbsent(WarMineStructures.RUINED_THREE.get(),
+                    DimensionStructuresSettings.field_236191_b_.get(WarMineStructures.RUINED_THREE.get()));
 
             serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
         }
