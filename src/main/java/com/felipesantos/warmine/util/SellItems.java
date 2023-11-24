@@ -77,6 +77,14 @@ public class SellItems {
     public static int isSpecialItem(ItemStack itemStack,WarTeam warTeam, Item item){
         if (item == WarMineItems.POINT.get()) {
             return validateItemQuantity(itemStack,1,1,warTeam);
+        } else if(item == WarMineItems.ROTTEN_FLESH_BAG.get() || item == WarMineItems.MAGMA_CREAM_BAG.get()){
+            return validateItemQuantity(itemStack,16,6,warTeam);
+        } else if(item == WarMineItems.GHAST_TEAR_BOTTLE.get()){
+            return validateItemQuantity(itemStack,16,9,warTeam);
+        } else if(item == WarMineItems.BLAZE_ROD_BAG.get()){
+            return validateItemQuantity(itemStack,16,7,warTeam);
+        } else if(item == WarMineItems.PRISMARINE_SHARD_BAG.get() || item == WarMineItems.PHANTOM_MEMBRANE_BAG.get()){
+            return validateItemQuantity(itemStack,16,13,warTeam);
         }
         return -1;
     }

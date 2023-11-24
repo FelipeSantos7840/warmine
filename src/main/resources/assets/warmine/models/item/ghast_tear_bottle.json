@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "warmine:item/ghast_tear_bottle"
+  }
+}

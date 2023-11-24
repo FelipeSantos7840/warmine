@@ -5,6 +5,12 @@
   "item.warmine.point": "\u00A76Point\u00A7r",
   "item.warmine.horn": "War Horn",
   "item.warmine.city_rune": "City Rune",
+  "item.warmine.rotten_flesh_bag": "Rotten Flesh Bag",
+  "item.warmine.prismarine_shard_bag": "Prismarine Shard Bag",
+  "item.warmine.phantom_membrane_bag": "Phantom Membrane Bag",
+  "item.warmine.magma_cream_bag": "Magma Cream Bag",
+  "item.warmine.blaze_rod_bag": "Blaze Rod Bag",
+  "item.warmine.ghast_tear_bottle": "Ghast Tear Bottle",
   "entity.minecraft.villager.warmine.points_merchant": "Points Merchant",
   "itemGroup.warminegroup": "WarMine"
 }
