@@ -33,7 +33,7 @@ public class TeamsInWarCommand {
                 source.sendFeedback(new StringTextComponent(strBuilder.toString()),true);
                 return 1;
             } else {
-                source.sendFeedback(new StringTextComponent("Your team is not in War!"),true);
+                source.sendFeedback(new StringTextComponent(playerTeam.getName()+" is not in War!"),true);
             }
         } else {
             source.sendFeedback(new StringTextComponent("You Dont Have a Team!"),true);
