@@ -14,7 +14,9 @@ public class TeamRemoveCommand {
                 .then(Commands.literal("removeTeam")
                         .requires(source -> source.hasPermissionLevel(4))
                         .then(Commands.argument("nameteam", StringArgumentType.string()).executes((command)-> {
+
             return teamRemove(command.getSource(),StringArgumentType.getString(command, "nameteam"));
+
         }))));
     }
 

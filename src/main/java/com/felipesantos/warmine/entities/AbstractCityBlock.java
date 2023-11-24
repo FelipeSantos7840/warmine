@@ -50,7 +50,4 @@ public abstract class AbstractCityBlock {
     public void setName(String name) {
         this.name = name;
     }
-
-
-
 }
