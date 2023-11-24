@@ -84,7 +84,7 @@ public class SellItems {
         } else if(item == WarMineItems.BLAZE_ROD_BAG.get()){
             return validateItemQuantity(itemStack,16,7,warTeam);
         } else if(item == WarMineItems.PRISMARINE_SHARD_BAG.get() || item == WarMineItems.PHANTOM_MEMBRANE_BAG.get()){
-            return validateItemQuantity(itemStack,16,13,warTeam);
+            return validateItemQuantity(itemStack,8,15,warTeam);
         }
         return -1;
     }
