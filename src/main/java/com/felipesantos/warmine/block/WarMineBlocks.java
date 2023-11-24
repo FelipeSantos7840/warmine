@@ -4,6 +4,7 @@ import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.block.custom.CityBlock;
 import com.felipesantos.warmine.block.custom.CrownBlock;
 import com.felipesantos.warmine.block.custom.MarketBlock;
+import com.felipesantos.warmine.groups.WarMineGroup;
 import com.felipesantos.warmine.item.WarMineItems;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -41,7 +42,7 @@ public class WarMineBlocks {
     }
 
     private static <T extends Block>void registerBlockItem(String name, RegistryObject<T> block){
-        WarMineItems.ITEMS.register(name,() -> new BlockItem(block.get(),new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
+        WarMineItems.ITEMS.register(name,() -> new BlockItem(block.get(),new Item.Properties().group(WarMineGroup.WAR_GROUP)));
     }
 
     public static void registerBus(IEventBus event){

@@ -5,5 +5,6 @@
   "item.warmine.point": "\u00A76Point\u00A7r",
   "item.warmine.horn": "War Horn",
   "item.warmine.city_rune": "City Rune",
-  "entity.minecraft.villager.warmine.points_merchant": "Points Merchant"
+  "entity.minecraft.villager.warmine.points_merchant": "Points Merchant",
+  "itemGroup.warminegroup": "WarMine"
 }
