@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.world.structure;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.world.structure.structures.MerchantHouseStructure;
 import com.felipesantos.warmine.world.structure.structures.RuinedOneStructure;
 import com.felipesantos.warmine.world.structure.structures.RuinedThreeStructure;
 import com.felipesantos.warmine.world.structure.structures.RuinedTwoStructure;
@@ -32,6 +33,9 @@ public class WarMineStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> RUINED_THREE =
             STRUCTURES.register("ruined3", RuinedThreeStructure::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> MERCHANT_HOUSE =
+            STRUCTURES.register("merchant_house", MerchantHouseStructure::new);
+
     /* average distance apart in chunks between spawn attempts */
     /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/
     /* this modifies the seed of the structure so no two structures always spawn over each-other.
@@ -48,6 +52,10 @@ public class WarMineStructures {
         setupMapSpacingAndLand(RUINED_THREE.get(),
                 new StructureSeparationSettings(60,40,13245878),
                 true);
+
+        setupMapSpacingAndLand(MERCHANT_HOUSE.get(),
+                new StructureSeparationSettings(70,40,13245879),
+        true);
     }
 
     /**

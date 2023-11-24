@@ -1,6 +1,7 @@
 package com.felipesantos.warmine.world;
 
 import com.felipesantos.warmine.WarMine;
+import com.felipesantos.warmine.world.gen.MerchantHouseStructureGeneration;
 import com.felipesantos.warmine.world.gen.RuinedOneStructureGeneration;
 import com.felipesantos.warmine.world.gen.RuinedThreeStructureGeneration;
 import com.felipesantos.warmine.world.gen.RuinedTwoStructureGeneration;
@@ -34,6 +35,7 @@ public class WarMineGenWorldEvents {
         RuinedOneStructureGeneration.generateStructures(event);
         RuinedTwoStructureGeneration.generateStructures(event);
         RuinedThreeStructureGeneration.generateStructures(event);
+        MerchantHouseStructureGeneration.generateStructures(event);
     }
 
     @SubscribeEvent
@@ -73,6 +75,9 @@ public class WarMineGenWorldEvents {
 
             tempMap.putIfAbsent(WarMineStructures.RUINED_THREE.get(),
                     DimensionStructuresSettings.field_236191_b_.get(WarMineStructures.RUINED_THREE.get()));
+
+            tempMap.putIfAbsent(WarMineStructures.MERCHANT_HOUSE.get(),
+                    DimensionStructuresSettings.field_236191_b_.get(WarMineStructures.MERCHANT_HOUSE.get()));
 
             serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
         }
