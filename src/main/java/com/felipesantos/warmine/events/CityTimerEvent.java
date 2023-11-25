@@ -17,7 +17,9 @@ public class CityTimerEvent {
         if (event.phase == TickEvent.Phase.START) {
             ticksElapsed++;
             if(ticksElapsed >= 30*TICKS_PER_MINUTE){
-                incrementPoints();
+                if(WarMine.IS_POSSIBLE) {
+                    incrementPoints();
+                }
                 ticksElapsed = 0;
             }
         }

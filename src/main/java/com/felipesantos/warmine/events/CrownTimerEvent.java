@@ -3,6 +3,7 @@ package com.felipesantos.warmine.events;
 import com.felipesantos.warmine.WarMine;
 import com.felipesantos.warmine.entities.CrownDataBlock;
 import com.felipesantos.warmine.entities.MinecraftData;
+import com.felipesantos.warmine.entities.WarMineData;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,7 +20,9 @@ public class CrownTimerEvent {
         if (event.phase == TickEvent.Phase.START) {
             ticksElapsed++;
             if(ticksElapsed >= 10*TICKS_PER_MINUTE){
-                incrementPoints();
+                if(WarMine.IS_POSSIBLE) {
+                    incrementPoints();
+                }
                 ticksElapsed = 0;
             }
         }
