@@ -7,6 +7,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class ToCapitalCommand {
@@ -28,12 +29,13 @@ public class ToCapitalCommand {
                     Coordinate crownCoordinate = crownDataBlock.getCoordinate();
 
                     playerEntity.setPositionAndUpdate(crownCoordinate.getX(), crownCoordinate.getY(), crownCoordinate.getZ());
-                    playerEntity.sendStatusMessage(new StringTextComponent("Welcome to the " + crownDataBlock.getName()), true);
+                    playerEntity.sendStatusMessage(new TranslationTextComponent("command.tocapital.success")
+                            .appendSibling(new StringTextComponent(crownDataBlock.getName() != null?crownDataBlock.getName():"null")), true);
                     return 1;
                 }
             }
         } else {
-            source.sendFeedback(new StringTextComponent("toCapital is available only Overworld"), true);
+            source.sendFeedback(new StringTextComponent("command.tocapital.failed"), true);
         }
         return -1;
     }

@@ -9,6 +9,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class PlayerAddCommand {
     public PlayerAddCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -29,18 +30,21 @@ public class PlayerAddCommand {
             if(player.getWarTeam() == null){
                 MinecraftTeamsManipulator.addPlayerTeam(nameTeam,player);
                 if(player.getWarTeam() != null){
-                    source.sendFeedback(new StringTextComponent(namePlayer+" added to "+nameTeam+"!"),true);
+                    source.sendFeedback(new StringTextComponent(namePlayer)
+                            .appendSibling(new TranslationTextComponent("command.playeradd.success")
+                                    .appendSibling(new StringTextComponent(nameTeam+"!"))),true);
                 } else {
-                    source.sendFeedback(new StringTextComponent(nameTeam+" not found!"),true);
+                    source.sendFeedback(new StringTextComponent(nameTeam)
+                            .appendSibling(new TranslationTextComponent("command.playeradd.failed1")),true);
                 }
 
                 return 1;
             } else {
-                source.sendFeedback(new StringTextComponent(namePlayer+" already on a Team!"),true);
+                source.sendFeedback(new StringTextComponent(namePlayer)
+                        .appendSibling(new TranslationTextComponent("command.playeradd.failed2")),true);
             }
         } else {
-
-            source.sendFeedback(new StringTextComponent("Error to Locate User!"),true);
+            source.sendFeedback(new TranslationTextComponent("command.playeradd.failed3"),true);
         }
         return -1;
     }

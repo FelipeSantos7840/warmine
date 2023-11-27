@@ -19,6 +19,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -75,9 +76,15 @@ public class CrownBlock extends HorizontalBlock {
                             player.inventory.deleteStack(itemStack);
                         }
                     }
-                    player.sendStatusMessage(new StringTextComponent(crownBlock.getWarTeam().getName()+" has " + warTeam.getScore()+" points!"),true);
+                    player.sendStatusMessage(new StringTextComponent(crownBlock.getWarTeam().getName())
+                            .appendSibling(new TranslationTextComponent("status.crownblock.rightclick1")
+                                    .appendSibling(new StringTextComponent(warTeam.getScore().toString())
+                                            .appendSibling(new TranslationTextComponent("status.crownblock.rightclick2")))),true);
                 } else {
-                    player.sendStatusMessage(new StringTextComponent("City of "+ WarMineData.getCapital(pos).getName()+"! Capital of " + WarMineData.getCapital(pos).getWarTeam().getName()),true);
+                    player.sendStatusMessage(new TranslationTextComponent("status.crownblock.rightclick3")
+                            .appendSibling(new StringTextComponent(WarMineData.getCapital(pos).getName() != null?WarMineData.getCapital(pos).getName():"null")
+                                    .appendSibling(new TranslationTextComponent("status.crownblock.rightclick4")
+                                            .appendSibling(new StringTextComponent(WarMineData.getCapital(pos).getWarTeam().getName())))),true);
                 }
                 FileManipuler.warmineSaveData(MinecraftData.warmine);
             }

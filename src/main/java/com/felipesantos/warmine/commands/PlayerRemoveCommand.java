@@ -9,6 +9,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class PlayerRemoveCommand {
     public PlayerRemoveCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -33,13 +34,16 @@ public class PlayerRemoveCommand {
         if(player != null){
             val = MinecraftTeamsManipulator.removePlayerTeam(player);
             if(val){
-                source.sendFeedback(new StringTextComponent(playerName+" removed of the Team!"),true);
+                source.sendFeedback(new StringTextComponent(playerName)
+                        .appendSibling(new TranslationTextComponent("command.playerremove.success")),true);
             } else {
-                source.sendFeedback(new StringTextComponent(playerName+" not have a Team!"),true);
+                source.sendFeedback(new StringTextComponent(playerName)
+                        .appendSibling(new TranslationTextComponent("command.playerremove.failed1")),true);
             }
             return 1;
         } else {
-            source.sendFeedback(new StringTextComponent(playerName+" not Localized!"),true);
+            source.sendFeedback(new StringTextComponent(playerName)
+                    .appendSibling(new TranslationTextComponent("command.playerremove.failed2")),true);
             return -1;
         }
     }

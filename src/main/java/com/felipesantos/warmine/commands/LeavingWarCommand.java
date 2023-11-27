@@ -9,6 +9,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class LeavingWarCommand {
     public LeavingWarCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -30,16 +31,19 @@ public class LeavingWarCommand {
                 if (validate) {
                     WarMineData.getWarTeam(teamToStopWar).getTeamsInWar().remove(player.getWarTeam().getName());
                     player.getWarTeam().decrementScore(15);
-                    source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " retired of war with " + teamToStopWar + "!"), true);
+                    source.sendFeedback(new StringTextComponent(player.getWarTeam().getName())
+                            .appendSibling(new TranslationTextComponent("command.leavingwar.success")
+                                    .appendSibling(new StringTextComponent(teamToStopWar)
+                                            .appendSibling(new StringTextComponent("!")))), true);
                     return 1;
                 } else {
-                    source.sendFeedback(new StringTextComponent(teamToStopWar + " is not localized!"), true);
+                    source.sendFeedback(new StringTextComponent(teamToStopWar).appendSibling(new TranslationTextComponent("command.leavingwar.failed1")), true);
                 }
             } else {
-                source.sendFeedback(new StringTextComponent("Leaving war cost 15 points!!"),true);
+                source.sendFeedback(new TranslationTextComponent("command.leavingwar.failed2"),true);
             }
         } else {
-            source.sendFeedback(new StringTextComponent("You need a team firts!"),true);
+            source.sendFeedback(new TranslationTextComponent("command.leavingwar.failed3"),true);
         }
         return -1;
     }

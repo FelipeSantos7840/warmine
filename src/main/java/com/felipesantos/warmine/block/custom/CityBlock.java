@@ -18,6 +18,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeBlock;
@@ -63,7 +64,10 @@ public class CityBlock extends HorizontalBlock implements IForgeBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(!worldIn.isRemote()) {
-            player.sendStatusMessage(new StringTextComponent("City of " + WarMineData.getCity(pos).getName() + "! Team: " + WarMineData.getCity(pos).getWarTeam().getName()), true);
+            player.sendStatusMessage(new TranslationTextComponent("status.cityblock.rightclick1")
+                    .appendSibling(new StringTextComponent(WarMineData.getCity(pos).getName() != null?WarMineData.getCity(pos).getName():"null")
+                            .appendSibling(new TranslationTextComponent("status.cityblock.rightclick2")
+                                    .appendSibling(new StringTextComponent(WarMineData.getCity(pos).getWarTeam().getName())))), true);
             FileManipuler.warmineSaveData(MinecraftData.warmine);
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

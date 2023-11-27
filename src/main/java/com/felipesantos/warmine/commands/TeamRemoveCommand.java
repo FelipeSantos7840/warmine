@@ -7,6 +7,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class TeamRemoveCommand {
     public TeamRemoveCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -22,7 +23,7 @@ public class TeamRemoveCommand {
 
     private int teamRemove(CommandSource source,String teamName) throws CommandSyntaxException {
             MinecraftTeamsManipulator.removeDataTeam(teamName);
-            source.sendFeedback(new StringTextComponent("Deleted Team!"),true);
+            source.sendFeedback(new TranslationTextComponent("command.teamremove.success"),true);
             return 1;
     }
 }

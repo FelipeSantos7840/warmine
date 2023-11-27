@@ -7,6 +7,8 @@ import com.felipesantos.warmine.entities.WarMineData;
 import com.felipesantos.warmine.util.FileManipuler;
 import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.STitlePacket;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -37,9 +39,9 @@ public class PlayerConnectEvent {
                     FileManipuler.warmineCollectData(MinecraftData.warmine);
                 }
 
-                event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome! Warmine is working"),true);
+                event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.firstconnect.success"),true);
             } else {
-                event.getPlayer().sendStatusMessage(new StringTextComponent("Welcome! Failed locate World!"),true);
+                event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.firstconnect.failed"),true);
             }
             isInitialConnect = true;
         }
@@ -48,5 +50,12 @@ public class PlayerConnectEvent {
         if(MinecraftData.warmine.playerDataExist(playerName) == null){
             MinecraftData.warmine.getPlayers().add(MinecraftTeamsManipulator.addPlayerTeam(null,new Player(playerName)));
         }
+        ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
+        sendTitleToPlayer(serverPlayerEntity,"event.playerconnect.success");
     }
+
+    public static void sendTitleToPlayer(ServerPlayerEntity serverPlayerEntity, String translationID){
+        serverPlayerEntity.connection.sendPacket(new STitlePacket(STitlePacket.Type.TITLE,new TranslationTextComponent(translationID),1,3,1));
+    }
+
 }

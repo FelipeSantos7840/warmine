@@ -6,6 +6,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Comparator;
 import java.util.List;
@@ -23,7 +24,10 @@ public class LeaderboardCommand {
             warTeams.sort(Comparator.comparing(WarTeam::getScore));
             StringBuilder strBuilder = new StringBuilder();
             for (WarTeam team : warTeams) {
-                strBuilder.append("[Team : \u00A7b"+ team.getName() + "\u00A7r - Score: \u00A7c" + team.getScore() + "\u00A7r],\n");
+                strBuilder.append("["+new TranslationTextComponent("command.leaderboard.team").getString() +
+                        ": \u00A7b"+ team.getName() +
+                        "\u00A7r - "+new TranslationTextComponent("command.leaderboard.score").getString()+
+                        ": \u00A7c" + team.getScore() + "\u00A7r],\n");
             }
             source.sendFeedback(new StringTextComponent(strBuilder.toString()),true);
             return 1;

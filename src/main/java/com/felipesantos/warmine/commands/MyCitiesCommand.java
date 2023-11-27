@@ -7,6 +7,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,10 +29,15 @@ public class MyCitiesCommand {
             if(!cities.isEmpty()){
                 StringBuilder strBuilder = new StringBuilder("--CITIES--\n");
                 for(CityDataBlock city : cities){
-                    strBuilder.append("City Name:\u00A7c"+city.getName()+"\u00A7r | City Coordinate: "+city.getCoordinate()+"\n");
+                    strBuilder.append(new TranslationTextComponent("command.mycities.success1").getString()+
+                            ":\u00A7c"+city.getName()+"\u00A7r | "+
+                            new TranslationTextComponent("command.mycities.success2").getString()+
+                            ": "+city.getCoordinate()+"\n");
                 }
                 source.sendFeedback(new StringTextComponent(strBuilder.toString()),true);
                 return 1;
+            } else {
+                source.sendFeedback(new TranslationTextComponent("command.mycities.failed"),true);
             }
         }
         return -1;

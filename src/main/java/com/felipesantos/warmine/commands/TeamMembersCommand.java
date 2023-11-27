@@ -10,6 +10,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class TeamMembersCommand {
         WarTeam playerWarTeam = player.getWarTeam();
 
         if(playerWarTeam != null){
-            List<Player> players = MinecraftData.warmine.getPlayers().stream().filter((p) -> p.getWarTeam().equals(playerWarTeam)).collect(Collectors.toList());
+            List<Player> players = MinecraftData.warmine.getPlayers().stream().filter((p) -> playerWarTeam.equals(p.getWarTeam())).collect(Collectors.toList());
             StringBuilder strBuilder = new StringBuilder("--------- "+playerWarTeam.getName()+" ---------\n");
             for(Player playerUnique : players){
                 strBuilder.append("[ "+playerUnique.getName()+" ],");
@@ -35,7 +36,7 @@ public class TeamMembersCommand {
             source.sendFeedback(new StringTextComponent(strBuilder.toString()),true);
             return 1;
         } else {
-            source.sendFeedback(new StringTextComponent("You don't have a team!"), true);
+            source.sendFeedback(new TranslationTextComponent("command.teammembers.failed"), true);
         }
 
         return -1;

@@ -15,6 +15,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class ToCityCommand {
     public ToCityCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -37,13 +38,13 @@ public class ToCityCommand {
                     playerEntity.addPotionEffect(new EffectInstance(Effects.NAUSEA,120));
                     return 1;
                 } else {
-                    source.sendFeedback(new StringTextComponent("You need a City Rune in Main Hand!"),true);
+                    source.sendFeedback(new TranslationTextComponent("command.tocity.failed1"),true);
                 }
             } else {
-                source.sendFeedback(new StringTextComponent("Invalid City to Teleport!"),true);
+                source.sendFeedback(new TranslationTextComponent("command.tocity.failed2"),true);
             }
         } else {
-            source.sendFeedback(new StringTextComponent("City not found!"),true);
+            source.sendFeedback(new TranslationTextComponent("command.tocity.failed3"),true);
         }
         return -1;
     }

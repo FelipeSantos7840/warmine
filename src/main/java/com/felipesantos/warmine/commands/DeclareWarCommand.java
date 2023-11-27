@@ -8,9 +8,13 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class DeclareWarCommand {
+
+    private static final String BASE_ERROR = "command.declarewar.failed";
+
     public DeclareWarCommand(CommandDispatcher<CommandSource> dispatcher){
         dispatcher.register(Commands.literal("warmine")
                 .then(Commands.literal("declareWar")
@@ -35,28 +39,30 @@ public class DeclareWarCommand {
                                     player.getWarTeam().decrementScore(30);
                                     territoryDataBlock.getWarTeam().addTeamInWar(player.getWarTeam().getName());
                                     player.getWarTeam().addTeamInWar(teamWar.getName());
-                                    source.sendFeedback(new StringTextComponent(player.getWarTeam().getName() + " declared War with " + teamWar.getName()), true);
+                                    source.sendFeedback(new StringTextComponent(player.getWarTeam().getName())
+                                            .appendSibling(new TranslationTextComponent("command.declarewar.success")
+                                                    .appendSibling(new StringTextComponent(teamWar.getName()))), true);
                                     return 1;
                                 } else {
-                                    source.sendFeedback(new StringTextComponent("Declare war cost 30 points!!"), true);
+                                    source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"1"), true);
                                 }
                             } else {
-                                source.sendFeedback(new StringTextComponent("Teams already in war or territory is not the same of solicited!"), true);
+                                source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"2"), true);
                             }
                         } else {
-                            source.sendFeedback(new StringTextComponent("You can't declare war to your own team!"), true);
+                            source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"3"), true);
                         }
                     } else {
-                        source.sendFeedback(new StringTextComponent("Not in enemy territory!"), true);
+                        source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"4"), true);
                     }
                 } else {
-                    source.sendFeedback(new StringTextComponent("You need to be in the Overworld to declare war!"), true);
+                    source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"5"), true);
                 }
             } else {
-                source.sendFeedback(new StringTextComponent("You need a team to declare war!"), true);
+                source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"6"), true);
             }
         } else {
-            source.sendFeedback(new StringTextComponent("It has to be a war day to declare war!"), true);
+            source.sendFeedback(new TranslationTextComponent(BASE_ERROR+"7"), true);
         }
         return -1;
     }

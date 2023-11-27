@@ -12,6 +12,7 @@ import net.minecraft.command.Commands;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.UUID;
@@ -36,10 +37,10 @@ public class NameTerritoryCommand {
                 if(territoryBlock.getNameUUID() != null) {
                     setCustomName(source.getWorld(), territoryBlock.getNameUUID(), name);
                 }
-                source.sendFeedback(new StringTextComponent("Defined Territory Name!"),true);
+                source.sendFeedback(new TranslationTextComponent("command.nameterritory.success"),true);
                 return 1;
             } else {
-                source.sendFeedback(new StringTextComponent("This is not your territory!"),true);
+                source.sendFeedback(new TranslationTextComponent("command.nameterritory.failed"),true);
             }
         }
         return -1;

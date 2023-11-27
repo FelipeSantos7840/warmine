@@ -15,6 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -43,7 +44,7 @@ public class MarketBlock extends HorizontalBlock {
                 }
                 FileManipuler.warmineSaveData(MinecraftData.warmine);
             } else {
-                player.sendStatusMessage(new StringTextComponent("You don't have a team or a Crown Block!"),true);
+                player.sendStatusMessage(new TranslationTextComponent("status.marketblock.rightclick"),true);
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

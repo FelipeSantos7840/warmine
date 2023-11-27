@@ -13,6 +13,7 @@ import net.minecraft.command.Commands;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class GetPointsCommand {
     public GetPointsCommand(CommandDispatcher<CommandSource> dispatcher){
@@ -35,12 +36,12 @@ public class GetPointsCommand {
 
                 if(playerEntity.inventory.addItemStackToInventory(pointStack)){
                     warTeam.decrementScore(quantity);
-                    source.sendFeedback(new StringTextComponent("Added points to Inventory!"),true);
+                    source.sendFeedback(new TranslationTextComponent("command.getpoints.success"),true);
                 } else {
-                    source.sendFeedback(new StringTextComponent("Inventory Full!"),true);
+                    source.sendFeedback(new TranslationTextComponent("command.getpoints.failed1"),true);
                 }
             } else {
-                source.sendFeedback(new StringTextComponent(warTeam.getName() + " does not have the requested amount of Points!"),true);
+                source.sendFeedback(new TranslationTextComponent(warTeam.getName()).appendSibling(new TranslationTextComponent("command.getpoints.failed2")),true);
             }
         }
 
