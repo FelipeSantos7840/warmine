@@ -19,7 +19,7 @@ modId="warmine" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 # ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
 # see the associated build.gradle script for how to populate this completely automatically during a build
-version="${file.jarVersion}" #mandatory
+version="1.4" #mandatory
  # A display name for the mod
 displayName="War Mine" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
@@ -27,18 +27,22 @@ displayName="War Mine" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="examplemod.png" #optional
+logoFile="ForgeWarMineLogo.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks for this example mod goes to Java" #optional
+credits="Thank you very much for using WarMine, this is just the beginning, look forward to new Updates!" #optional
 # A text field displayed in the mod UI
-authors="Love, Cheese and small house plants" #optional
+authors="FelipinKK" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This is a long form description of the mod. You can write whatever you want here
+Warmine enables the creation of teams and territories, featuring its own points system and a variety of management commands. This allows a single moderator to efficiently oversee multiple teams on a server or play with friends via LAN.
 
-Have some lorem ipsum.
+The crown and capital blocks empower teams to delineate their territories and pursue expansion to accumulate points.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+WarMine's primary objective is to grant moderators the flexibility to determine the criteria for declaring a winning team, with the points and sales system being a recommended method.
+
+For further details, please visit our page on CurseForge: <link>
+
+Welcome to §6Warmine§r!
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.examplemod]] #optional
