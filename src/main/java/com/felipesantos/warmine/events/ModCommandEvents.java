@@ -29,6 +29,7 @@ public class ModCommandEvents {
         new TeamMembersCommand(event.getDispatcher());
         new MyCitiesCommand(event.getDispatcher());
         new TeamsInWarCommand(event.getDispatcher());
+        new MyCapitalCommand(event.getDispatcher());
 
         ConfigCommand.register(event.getDispatcher());
     }

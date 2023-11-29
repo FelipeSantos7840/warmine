@@ -67,5 +67,8 @@
   "command.isterritory.failed2": "isTerritory está disponivel apenas no Overworld!",
   "command.tocity.failed1": "Você precisa de uma Runa da Cidade em sua mão!",
   "command.tocity.failed2": "Cidade invalida para Teletransporte!",
-  "command.tocity.failed3": "Cidade não encontrada!"
+  "command.tocity.failed3": "Cidade não encontrada!",
+  "command.mycapital.success2": "Nome da Capital",
+  "command.mycapital.success3": "Coordenada da Capital",
+  "command.mycapital.failed1": "O seu time não possui um Bloco Capital!"
 }

@@ -45,7 +45,7 @@
   "command.leavingwar.success": " retired of war with ",
   "command.leavingwar.failed1": " is not localized!",
   "command.leavingwar.failed2": "Leaving war cost 15 points!!",
-  "command.leavingwar.failed3": "You need a team firts!",
+  "command.leavingwar.failed3": "You need a team firsts!",
   "command.mycities.success1": "City Name",
   "command.mycities.success2": "City Coordinate",
   "command.mycities.failed": "Your team don't have a city",
@@ -61,11 +61,14 @@
   "command.teamremove.success": "Deleted Team!",
   "command.teamsinwar.success": " in War!",
   "command.teamsinwar.failed1": " is not in War!",
-  "command.teamsinwar.failed2": "You Dont Have a Team!",
+  "command.teamsinwar.failed2": "You Don't Have a Team!",
   "command.isterritory.success": " Territory!!",
   "command.isterritory.failed1": "It is not a conquered territory",
   "command.isterritory.failed2": "isTerritory is available only Overworld!",
   "command.tocity.failed1": "You need a City Rune in Main Hand!",
   "command.tocity.failed2": "Invalid City to Teleport!",
-  "command.tocity.failed3": "City not found!"
+  "command.tocity.failed3": "City not found!",
+  "command.mycapital.success2": "Crown Name",
+  "command.mycapital.success3": "Crown Coordinate",
+  "command.mycapital.failed1": "Your team don't have a placed Crown Block"
 }
