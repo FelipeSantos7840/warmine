@@ -51,6 +51,9 @@ public class PlayerConnectEvent {
             MinecraftData.warmine.getPlayers().add(MinecraftTeamsManipulator.addPlayerTeam(null,new Player(playerName)));
         }
         ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
+
+        System.out.println("LOG | Player Connect: " + player.getName().getString() + " | " + serverPlayerEntity.getPlayerIP());
+
         sendTitleToPlayer(serverPlayerEntity,"event.playerconnect.success");
     }
 

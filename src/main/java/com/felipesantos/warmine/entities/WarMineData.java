@@ -17,15 +17,19 @@ public class WarMineData {
     private List<Player> players;
     private List<CrownDataBlock> capitals;
     private List<CityDataBlock> cities;
+    private ConfigData configData;
 
-    public WarMineData(List<WarTeam> warTeams, List<Player> players, List<CrownDataBlock> capitals) {
+    public WarMineData(List<WarTeam> warTeams, List<Player> players, List<CrownDataBlock> capitals, ConfigData configData) {
         this.warTeams = warTeams;
         this.players = players;
         this.capitals = capitals;
+        this.configData = configData;
     }
 
     public WarMineData() {
     }
+
+    public ConfigData getConfigData() {return configData;}
 
     public List<WarTeam> getTeams() {
         return warTeams;
@@ -58,6 +62,10 @@ public class WarMineData {
     public void setCities(List<CityDataBlock> cities) {
         this.cities = cities;
     }
+
+    public void setConfigData(ConfigData configData) {this.configData = configData;}
+
+    public List<WarTeam> getWarTeams() {return warTeams;}
 
     public static WarTeam getWarTeam(String teamPlayer){
         List<WarTeam> teamsResult = MinecraftData.warmine.getTeams().stream()

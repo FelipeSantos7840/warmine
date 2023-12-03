@@ -21,6 +21,26 @@ public class JsonManipulator {
         mapperJson.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
+    public static ConfigData configDataCollect(){
+        File jsonFile = FileManipuler.warmineJSONFile("config_data.json");
+        if(jsonFile.exists()){
+            ConfigData configData = new ConfigData();
+            try {
+                JsonNode jsonNode = mapperJson.readTree(jsonFile);
+                if(jsonNode.has("lobby_coordinate")) {
+                    JsonNode coordNode = jsonNode.get("lobby_coordinate");
+                    configData.setLobbyCoord(new Coordinate(coordNode.get("X").asInt(), coordNode.get("Y").asInt(), coordNode.get("Z").asInt()));
+                    System.out.println("LOG | Coordinate: " + configData.getLobbyCoord());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return configData;
+        } else {
+            return new ConfigData();
+        }
+    }
+
     public static List<WarTeam> teamsCollect(){
         List<WarTeam> warTeams = new ArrayList<>();
         File jsonFile = FileManipuler.warmineJSONFile("teams.json");
@@ -144,6 +164,21 @@ public class JsonManipulator {
         } else {
             return new CrownDataBlock(new Coordinate(x,y,z),nameCapital,WarMineData.getWarTeam(teamBlock),textUUID);
         }
+    }
+
+    public static void saveConfigData(ConfigData configData){
+        ObjectNode rootNode = mapperJson.createObjectNode();
+        ArrayNode lobbyCoordNode;
+        if(configData.getLobbyCoord() != null){
+            lobbyCoordNode = mapperJson.createArrayNode();
+            lobbyCoordNode.add(configData.getLobbyCoord().getX());
+            lobbyCoordNode.add(configData.getLobbyCoord().getY());
+            lobbyCoordNode.add(configData.getLobbyCoord().getZ());
+            rootNode.set("lobby_coordinate",lobbyCoordNode);
+        }
+
+        JsonManipulator.writeJson("config_data.json",rootNode);
+
     }
 
     public static void saveTeams(List<WarTeam> warTeams){

@@ -39,6 +39,10 @@ public class Coordinate {
         return validate;
     }
 
+    public static Coordinate getCoordinateOfPos(BlockPos pos){
+        return new Coordinate(pos.getX(),pos.getY(),pos.getZ());
+    }
+
     public BlockPos toBlockPos(){
         return new BlockPos(x,y,z);
     }
