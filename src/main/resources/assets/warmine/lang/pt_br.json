@@ -70,5 +70,10 @@
   "command.tocity.failed3": "Cidade não encontrada!",
   "command.mycapital.success2": "Nome da Capital",
   "command.mycapital.success3": "Coordenada da Capital",
-  "command.mycapital.failed1": "O seu time não possui um Bloco Capital!"
+  "command.mycapital.failed1": "O seu time não possui um Bloco Capital!",
+  "command.setlobby.success": "A \u00A7bLobby\u00A7r foi definida no servidor!",
+  "command.setlobby.failed1": "Warmine está com erro! Verifique o mod!",
+  "command.tolobby.success": "Bem-Vindo ao \u00A7bLobby\u00A7r",
+  "command.tolobby.failed1": "Erro na coleta da configuração!!",
+  "command.tolobby.failed2": "O moderador não definiu uma lobby!"
 }

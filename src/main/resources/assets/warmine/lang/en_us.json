@@ -70,5 +70,10 @@
   "command.tocity.failed3": "City not found!",
   "command.mycapital.success2": "Crown Name",
   "command.mycapital.success3": "Crown Coordinate",
-  "command.mycapital.failed1": "Your team don't have a placed Crown Block"
+  "command.mycapital.failed1": "Your team don't have a placed Crown Block",
+  "command.setlobby.success": "Defined \u00A7bLobby\u00A7r to Server!",
+  "command.setlobby.failed1": "Warmine is in error! Check the mod!",
+  "command.tolobby.success": "Welcome to the \u00A7bLobby\u00A7r",
+  "command.tolobby.failed1": "Error collecting configuration!",
+  "command.tolobby.failed2": "The moderator did not define a lobby"
 }

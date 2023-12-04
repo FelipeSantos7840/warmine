@@ -28,8 +28,8 @@ public class JsonManipulator {
             try {
                 JsonNode jsonNode = mapperJson.readTree(jsonFile);
                 if(jsonNode.has("lobby_coordinate")) {
-                    JsonNode coordNode = jsonNode.get("lobby_coordinate");
-                    configData.setLobbyCoord(new Coordinate(coordNode.get("X").asInt(), coordNode.get("Y").asInt(), coordNode.get("Z").asInt()));
+                    ArrayNode coordNode = (ArrayNode) jsonNode.get("lobby_coordinate");
+                    configData.setLobbyCoord(new Coordinate(coordNode.get(0).asInt(),coordNode.get(1).asInt(),coordNode.get(2).asInt()));
                     System.out.println("LOG | Coordinate: " + configData.getLobbyCoord());
                 }
             } catch (IOException e) {
