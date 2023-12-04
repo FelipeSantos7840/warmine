@@ -9,6 +9,7 @@ import com.felipesantos.warmine.util.MinecraftTeamsManipulator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.STitlePacket;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -19,13 +20,13 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = WarMine.MOD_ID)
 public class PlayerConnectEvent {
 
-    private static boolean isInitialConnect = false;
-
     @SubscribeEvent
     public static void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent event){
         PlayerEntity player = event.getPlayer();
-        if(!isInitialConnect){
-            String path;
+        String playerName = player.getName().getString();
+        ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
+
+        if(compareWorldName(player.getServer())){
             boolean pathLocalized = FileManipuler.locateWorldSave(player.getServer());
             if(pathLocalized){
                 WarMine.IS_POSSIBLE = true;
@@ -43,17 +44,12 @@ public class PlayerConnectEvent {
             } else {
                 event.getPlayer().sendStatusMessage(new TranslationTextComponent("event.firstconnect.failed"),true);
             }
-            isInitialConnect = true;
         }
-
-        String playerName = player.getName().getString();
         if(MinecraftData.warmine.playerDataExist(playerName) == null){
             MinecraftData.warmine.getPlayers().add(MinecraftTeamsManipulator.addPlayerTeam(null,new Player(playerName)));
         }
-        ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
 
         System.out.println("LOG | Player Connect: " + player.getName().getString() + " | " + serverPlayerEntity.getPlayerIP());
-
         sendTitleToPlayer(serverPlayerEntity,"event.playerconnect.success");
     }
 
@@ -61,4 +57,7 @@ public class PlayerConnectEvent {
         serverPlayerEntity.connection.sendPacket(new STitlePacket(STitlePacket.Type.TITLE,new TranslationTextComponent(translationID),1,3,1));
     }
 
+    private static boolean compareWorldName(MinecraftServer server){
+        return FileManipuler.getWorldName() == null || !(server.getServerConfiguration().getWorldName().equalsIgnoreCase(FileManipuler.getWorldName()));
+    }
 }
